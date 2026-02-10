@@ -127,6 +127,14 @@ function Favorites() {
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
             >
+                <button
+                    className={`${styles.navButton} ${styles.prevButton}`}
+                    onClick={prevSlide}
+                    aria-label="Previous slide"
+                >
+                    ‹
+                </button>
+
                 <div
                     className={styles.carouselTrack}
                     style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -143,6 +151,14 @@ function Favorites() {
                         </div>
                     ))}
                 </div>
+
+                <button
+                    className={`${styles.navButton} ${styles.nextButton}`}
+                    onClick={nextSlide}
+                    aria-label="Next slide"
+                >
+                    ›
+                </button>
             </div>
 
             <div className={styles.dots}>
