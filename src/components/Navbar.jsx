@@ -1,17 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 
 function Navbar() {
     return (
         <nav className={styles.navbar}>
-            <div className={styles.brandName}>
+            <Link to="/" className={styles.brandName}>
                 maua.imani
-            </div>
+            </Link>
 
             <div className={styles.navigators}>
-                <Link to='/experience' className={styles.navigators}>Experience</Link>
-                <Link to='/projects' className={styles.navigators}>Projects</Link>
-                <Link to='/extracurriculars' className={styles.navigators}>Extracurriculars</Link>
+                <NavLink to='/experience' className={({ isActive }) => isActive ? styles.activeNavLink : styles.navLink}>Experience</NavLink>
+                <NavLink to='/projects' className={({ isActive }) => isActive ? styles.activeNavLink : styles.navLink}>Projects</NavLink>
+                <NavLink to='/extracurriculars' className={({ isActive }) => isActive ? styles.activeNavLink : styles.navLink}>Extracurriculars</NavLink>
             </div>
 
             <div className={styles.contactCard}>
