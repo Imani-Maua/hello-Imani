@@ -22,7 +22,7 @@ function ExperienceSection() {
                 "Collaborated in a cross-functional, 4-person engineering team, contributing to feature design, implementation, and testing.",
                 "Participated in code reviews and iterative development, strengthening system reliability and maintainability in a production environment."
             ]
-            
+
         },
         {
             title: "Club Coordinator",
@@ -30,7 +30,7 @@ function ExperienceSection() {
             startDate: "Sep 2023",
             endDate: "Present",
             description: "Led and coordinated technical workshops, hackathons, and community events for students interested in Google technologies and software development. Fostered a collaborative learning environment and connected students with industry professionals and resources."
-            
+
         },
         {
             title: "Teaching Assistant",
@@ -48,7 +48,7 @@ function ExperienceSection() {
 
     return (
         <section className={styles.experienceSection}>
-            <h2 className={styles.sectionTitle}>Experience</h2>
+            <h2 className={styles.sectionTitle}>Things I've done:</h2>
             <div className={styles.cardsContainer}>
                 {experiences.map((exp, index) => (
                     <ExperienceCard
