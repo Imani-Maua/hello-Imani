@@ -1,0 +1,39 @@
+@import '../styles/variables.scss';
+
+.projectSection {
+    padding: 3rem 2rem;
+    width: 100%;
+}
+
+.sectionTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 3px solid $brand-pink;
+    width: 100%;
+}
+
+.projectsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .projectsGrid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .projectSection {
+        padding: 2rem 1rem;
+    }
+
+    .projectsGrid {
+        grid-template-columns: 1fr;
+    }
+}
