@@ -11,10 +11,23 @@
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     overflow: hidden;
+    animation: fadeSlideIn 0.5s ease;
 
     &:hover {
         box-shadow: 0 4px 20px rgba(236, 72, 153, 0.12);
         transform: translateY(-2px);
+    }
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
@@ -36,7 +49,7 @@
 .carouselPhoto {
     width: 200px;
     height: 200px;
-    object-fit:fill;
+    object-fit: fill;
     border-radius: 0;
 }
 
