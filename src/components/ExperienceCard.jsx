@@ -21,7 +21,7 @@ function ExperienceCard({ title, company, type, location, startDate, endDate, du
             </div>
 
             {isExpanded && (
-                <div className={styles.details}>
+                <div className={`${styles.details} ${styles.desktopOnly}`}>
                     <div className={styles.description}>
                         {Array.isArray(description) ? (
                             <ul>
@@ -33,11 +33,6 @@ function ExperienceCard({ title, company, type, location, startDate, endDate, du
                             <p>{description}</p>
                         )}
                     </div>
-                    {skills && skills.length > 0 && (
-                        <div className={styles.skills}>
-                            <strong>Skills:</strong> {skills.join(', ')}
-                        </div>
-                    )}
                 </div>
             )}
         </div>

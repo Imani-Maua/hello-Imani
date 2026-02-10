@@ -37,19 +37,19 @@
 }
 
 .title {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: $text-primary;
-    margin: 0 0 0.25rem 0;
+    margin: 0 0 0.2rem 0;
 }
 
 
 
 .company {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: $brand-pink;
-    margin: 0 0 0.25rem 0;
+    margin: 0 0 0.2rem 0;
 }
 
 .type {
@@ -86,79 +86,37 @@
     margin: 0;
 }
 
+.desktopOnly {
+    @media (max-width: 768px) {
+        display: none !important;
+    }
+}
+
 .details {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #e5e7eb;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba($border-gray, 0.5);
     animation: slideDown 0.3s ease;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.description {
-    margin-bottom: 1rem;
-
-    p {
-        color: #4b5563;
-        line-height: 1.6;
-        margin: 0;
-    }
-
-    ul {
-        margin: 0;
-        padding-left: 1.5rem;
-
-        li {
-            color: #4b5563;
-            line-height: 1.7;
-            margin-bottom: 0.5rem;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-    }
-}
-
-.skills {
-    font-size: 0.875rem;
-    color: #6b7280;
-
-    strong {
-        color: $text-primary;
-    }
-}
-
-.expandIcon {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    font-size: 0.75rem;
-    color: $brand-pink;
-    transition: transform 0.3s ease;
 }
 
 // Responsive design
 @media (max-width: 768px) {
+    .experienceCard {
+        padding: 1.25rem;
+    }
+
     .header {
         flex-direction: column;
+        gap: 0.25rem;
     }
 
     .dateSection {
         text-align: left;
     }
-}
 
-.sectionTitle{
-    background-color: red;
+    .duration,
+    .dates,
+    .location {
+        font-size: 0.75rem;
+    }
 }
