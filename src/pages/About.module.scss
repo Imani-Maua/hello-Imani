@@ -1,0 +1,57 @@
+@import '../styles/variables.scss';
+
+.aboutContainer {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    max-width: 100%;
+}
+
+.mainContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.topSection {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.heroWrapper {
+    flex: 1;
+    min-width: 320px;
+}
+
+.experienceWrapper {
+    flex: 1;
+    max-width: 500px;
+    min-width: 320px;
+}
+
+.favoritesWrapper {
+    width: 100%;
+}
+
+.projectsWrapper {
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .experienceWrapper {
+        max-width: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .aboutContainer {
+        flex-direction: column;
+    }
+
+    .heroWrapper,
+    .experienceWrapper {
+        min-width: 100%;
+    }
+}

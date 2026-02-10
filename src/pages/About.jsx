@@ -2,19 +2,29 @@ import SidePanel from "../components/SidePanel";
 import Hero from '../components/Hero';
 import Favorites from '../components/Favorites';
 import ExperienceSection from '../components/ExperienceSection';
+import ProjectSection from '../components/ProjectSection';
+import styles from './About.module.scss';
 
 function About() {
     return (
-        <div style={{ display: "flex" }}>
+        <div className={styles.aboutContainer}>
             <SidePanel />
-            <div style={{ flex: 1 }}>
-                <Hero />
-                
-            </div>
-            <div style={{ flex: 1 }}>
-                <ExperienceSection />
-                <Favorites />
-            </div>
+            <main className={styles.mainContent}>
+                <div className={styles.topSection}>
+                    <div className={styles.heroWrapper}>
+                        <Hero />
+                    </div>
+                    <div className={styles.experienceWrapper}>
+                        <ExperienceSection />
+                    </div>
+                </div>
+                <div className={styles.favoritesWrapper}>
+                    <Favorites />
+                </div>
+                <div className={styles.projectsWrapper}>
+                    <ProjectSection />
+                </div>
+            </main>
         </div>
     );
 }
