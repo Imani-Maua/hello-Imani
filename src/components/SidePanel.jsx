@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from './SidePanel.module.css';
+import styles from './SidePanel.module.scss';
 
 function SidePanel() {
     const [isMathOpen, setIsMathOpen] = useState(false);
@@ -8,19 +8,19 @@ function SidePanel() {
     return (
         <aside className={styles.sidebar}>
             <div className={styles.section}>
-                <span>📚</span><h3>Education</h3>
+                <div className={styles.sectionHeader}><span>📚</span><span><strong>Education</strong></span></div>
                 <div className={styles.content}>
                     <p>University of Debrecen</p>
-                    <p>BSc Computer Science</p>
-                    <span>🎓</span><p>Graduating Feb 2027</p>
+                    <p>BSc. Computer Science</p>
+                    <p>🎓 <strong>Graduating: Feb 2027</strong></p>
                 </div>
             </div>
 
             <div className={styles.section}>
-                <span>💻</span><h3>Technical Skills</h3>
+                <div className={styles.sectionHeader}><span>💻</span><span><strong>Technical Skills</strong></span></div>
                 <div className={styles.content}>
                     <div className={styles.contentInfo}>
-                        <strong>Languages:</strong>
+                        <p><strong>Languages:</strong></p>
                         <p>Python, Java, R, C, C++, Swift, JavaScript, TypeScript, HTML/CSS</p>
                     </div>
 
@@ -41,11 +41,11 @@ function SidePanel() {
             </div>
 
             <div className={styles.section}>
-                <span>📖</span><h3>Academic Stack</h3>
+                <div className={styles.sectionHeader}><span>📖</span><span><strong>Academic Stack</strong></span></div>
                 <div className={styles.subSection}
-                onClick={() => setIsMathOpen(!isMathOpen)}
+                    onClick={() => setIsMathOpen(!isMathOpen)}
                 >
-                    <span>{isMathOpen ? '▼': '▶'}</span>
+                    <span>{isMathOpen ? '▼' : '▶'}</span>
                     <span>Maths & Statistics</span>
                 </div>
                 {isMathOpen && (
@@ -61,12 +61,13 @@ function SidePanel() {
 
 
                 <div className={styles.subSection}
-                onClick={() => setIsCSOpen(!isCSOpen)}
+                    onClick={() => setIsCSOpen(!isCSOpen)}
                 >
-                    <span>{isCSOpen? '▼': '▶'}</span>
+                    <span>{isCSOpen ? '▼' : '▶'}</span>
                     <span> Informatics & CS</span>
-                    <div>{isCSOpen &&(
-                    <ul>
+                </div>
+                {isCSOpen && (
+                    <ul className={styles.classList}>
                         <li>Logic In Computer Science</li>
                         <li>Introduction to Programming</li>
                         <li>Theory of Computation</li>
@@ -75,18 +76,18 @@ function SidePanel() {
                         <li>Database Systems</li>
                         <li>High Level Programming Languages</li>
                         <li>Object Oriented Programming</li>
-                        <li>Network Architecture and Protoclis</li>
-                        <li>Web Technliogies</li>
+                        <li>Network Architecture and Protocols</li>
+                        <li>Web Technologies</li>
                         <li>Foundations of Computer Security</li>
                         <li>Foundations of Artificial Intelligence</li>
                         <li>Software Engineering</li>
                         <li>Web Application Development</li>
-                        <li>Software Development Methodliogies</li>
+                        <li>Software Development Methodologies</li>
                         <li>Blockchain Technology</li>
                     </ul>
                 )}
-                    </div>
-                </div>
+                
+
 
             </div>
 
