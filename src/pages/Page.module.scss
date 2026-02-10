@@ -1,0 +1,88 @@
+@import '../styles/variables.scss';
+
+.pageContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    min-height: 100vh;
+}
+
+.pageHeader {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba($border-gray, 0.5);
+
+    h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: $text-primary;
+        margin: 0;
+    }
+
+    p {
+        font-size: 1rem;
+        color: #6b7280;
+        font-weight: 500;
+        margin-top: 0.25rem;
+    }
+}
+
+.centeredHeader {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .pageContainer {
+        padding: 2rem 1rem;
+    }
+
+    .pageHeader {
+        h1 {
+            font-size: 1.85rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    }
+}
+
+.engagementSection {
+    margin-top: 5rem;
+    padding: 3rem 2rem;
+    background-color: #f1f5f9;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba($border-gray, 0.5);
+
+    h2 {
+        font-size: 1.75rem;
+        color: $text-primary;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        color: #4b5563;
+        max-width: 600px;
+        margin: 0 auto 2rem auto;
+        line-height: 1.6;
+    }
+}
+
+.contactLink {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: $brand-pink;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(236, 72, 153, 0.4);
+        background-color: darken($brand-pink, 5%);
+    }
+}
