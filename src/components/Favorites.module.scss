@@ -19,6 +19,41 @@
     }
 }
 
+.navButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid $border-gray;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: $text-primary;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+
+    &:hover {
+        background: $brand-pink;
+        color: white;
+        border-color: $brand-pink;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+    }
+}
+
+.prevButton {
+    left: 1rem;
+}
+
+.nextButton {
+    right: 1rem;
+}
+
 .carouselTrack {
     display: flex;
     width: 100%;
@@ -34,19 +69,19 @@
 }
 
 .favoritesTitle {
-    font-size: 1.25rem;
+    font-size: 1.15rem; // Scaled down
     font-weight: 700;
     color: $text-primary;
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
-    border-bottom: 3px solid $brand-pink;
+    border-bottom: 1px solid $brand-pink;
 }
 
 .dots {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    margin-top: 1.5rem;
+    margin-top: 1.25rem; // Scaled down
 }
 
 .dot {
@@ -80,6 +115,10 @@
 
 
 @media (max-width: 768px) {
+    .favoritesSection {
+        padding: 1.5rem 1rem;
+    }
+
     .card {
         padding: 2rem 1.5rem;
         min-height: 200px;
