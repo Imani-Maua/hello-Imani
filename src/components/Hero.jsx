@@ -62,9 +62,9 @@ function Hero() {
             <div className={styles.intro}>
 
                 <p>I build software that makes life easier so we focus on the fun stuff 🐾</p>
-                <p>Solving problems is fun 🐾. Tech is fun! 🐾  and I love fun!🐾 </p>
+                <p>Solving problems is fun. Tech is fun!  and I love fun! </p>
                 <p>Right now, I'm training SlotMeIn, leveraging ML algorithms and constraint optimization to intelligently schedule employee shifts. I'm using predictive models and pattern recognition to turn scheduling nightmares into data-driven allocation. You see? Fun!</p>
-                <p>I'm passionate about becoming an engineer who builds scalable, distributed systems that solve real problems and ship value!</p>
+                <p>I'm passionate about being an engineer who builds scalable, distributed systems that solve real problems and ship value!</p>
                 <p>Tech is for women too! I'm actively working to inspire younger women and girls to get into SWE, AI, systems design - all of it, like they absolutely should! 💅🏾✨ </p>
                 <div className={styles.techStack}>
                 <p>Right now I'm doing a lot of:</p>
