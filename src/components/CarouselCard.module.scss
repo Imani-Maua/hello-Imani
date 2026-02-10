@@ -11,7 +11,6 @@
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     overflow: hidden;
-    animation: fadeSlideIn 0.5s ease;
 
     &:hover {
         box-shadow: 0 4px 20px rgba(236, 72, 153, 0.12);
@@ -38,18 +37,20 @@
 
     span {
         flex-shrink: 0;
-        width: 180px;
+        width: 200px;
+        height: 200px;
         display: flex;
         align-items: center;
         justify-content: center;
         background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        overflow: hidden;
     }
 }
 
 .carouselPhoto {
-    width: 200px;
-    height: 200px;
-    object-fit: fill;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 0;
 }
 
