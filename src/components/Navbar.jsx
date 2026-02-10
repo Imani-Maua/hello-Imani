@@ -15,9 +15,10 @@ function Navbar() {
             </div>
 
             <div className={styles.contactCard}>
-                <button>
+                <a href="mailto:elainemaua644@gmail.com?subject=We are looking for a software engineer&body=Hello Maua, "><button>
                     Contact Me
                 </button>
+                </a>
             </div>
 
         </nav>
