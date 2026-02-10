@@ -1,0 +1,48 @@
+@import '../styles/variables.scss';
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-md $spacing-lg;
+    background-color: $bg-white;
+    border-bottom: 1px solid $border-gray;
+}
+
+.brandName {
+    font-family: var(--font-logo);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $brand-pink;
+    cursor: pointer;
+}
+
+.navigators {
+    display: flex;
+    gap: $spacing-lg;
+}
+
+.navigators{
+    color: $text-primary;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: $brand-pink;
+    }
+}
+
+.contactCard button{
+    background-color: $brand-pink;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  &:hover {
+    opacity: 0.9;
+  }
+}
