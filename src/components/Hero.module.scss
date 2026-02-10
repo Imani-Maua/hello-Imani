@@ -1,0 +1,138 @@
+@import '../styles/variables.scss';
+
+.hero {
+    max-width: 1000px;
+    text-align: left;
+    padding: 3rem 2rem;
+}
+
+.profilePhotoContainer {
+    margin-bottom: 1.5rem;
+}
+
+.profilePhoto {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 60%;
+    border: 4px solid $brand-pink;
+    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.heroHeading {
+    display: flex;
+    gap: $spacing-lg;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.heroDesc {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.tagline {
+    background-color: $brand-pink;
+    color: $bg-white;
+    text-align: center;
+    padding: $spacing-sm;
+    max-width: 280px;
+    border-radius: 80px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+}
+
+.socials {
+    display: flex;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+}
+
+.socialButton {
+    padding: 0.625rem 1.25rem;
+    background-color: $bg-white;
+    border: 2px solid $border-gray;
+    border-radius: 8px;
+    text-decoration: none;
+    color: $text-primary;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+
+    &:hover {
+        border-color: $brand-pink;
+        color: $brand-pink;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);
+    }
+}
+
+.intro {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #fafafa;
+    border-left: 4px solid $brand-pink;
+    border-radius: 8px;
+
+    .techStack{
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    p {
+        margin: 0.75rem 0;
+        line-height: 1.4;
+        color: #4b5563;
+        font-size: 0.9rem;
+
+        &:first-child {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: $text-primary;
+        }
+
+        &:nth-child(6) {
+            font-size: 1rem;
+            font-weight: 500;
+            color: $brand-pink;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 1rem 0;
+
+        li {
+            padding-left: 1.75rem;
+            margin: 0.5rem 0;
+            position: relative;
+            color: #4b5563;
+            font-size: 0.9rem;
+            line-height: 1.6;
+
+            &::before {
+                content: "🐾";
+                position: absolute;
+                left: 0;
+                font-size: 1rem;
+            }
+        }
+    }
+}
