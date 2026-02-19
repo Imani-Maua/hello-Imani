@@ -23,7 +23,19 @@ export const workExperiences = [
             "Reinforced practical understanding of OS internals through hands-on labs and one-on-one technical support.",
             "Helped bridge theory and practice, improving students' confidence in low-level systems programming."
         ]
+    },
+    {
+        title: "SWE Fellow - WiseWomenCode",
+        company: "Wise",
+        startDate: "Feb 2026",
+        endDate: "Feb 2026",
+        description: [
+            "17/100 applicants selected to attend a 3-day intensive program at Wise Budapest's Budapest office.",
+            "Collaborated with Wisers + peers to build a Java-based money transfer service",
+            "Attended interactive sessions focused technical SWE interview skills and tech talks"
+        ]
     }
+    
 ];
 
 export const extracurriculars = [
