@@ -41,13 +41,22 @@ function ProjectSection({ layout = 'grid', hideTitle = false }) {
             live: ''
         },
         {
-            title: 'DoodlePad',
-            stack: 'MERN (MongoDB, Express, React, Node.js), TailwindCSS',
+            title: 'DoodleMe (frontend)',
+            stack: 'React, Vite, TailwindCSS, Context API',
             start: 'Dec 2025',
-            end: 'Jan 2026',
-            desc: 'A full-stack notes application that allows users to create, edit, delete, and search personal notes. Features a modern UI with glassmorphism effects and secure JWT authentication.',
+            end: 'Feb 2026',
+            desc: 'React SPA with JWT-based auth, Context API for state management, protected routing, real-time note search, and beautiful UI built with TailwindCSS.',
             github: 'https://github.com/Imani-Maua/DoodlePad',
-            live: ''
+            live: 'https://doodleme.netlify.app'
+        },
+        {
+            title: 'DoodleMe (Backend)',
+            stack: 'Node.js, Express, Prisma, MongoDB Atlas',
+            start: 'Dec 2025',
+            end: 'Feb 2026',
+            desc: 'REST API for a personal notes app with JWT authentication, bcrypt password hashing, rate limiting, and security headers. Migrated from Mongoose to Prisma ORM.',
+            github: 'https://github.com/Imani-Maua/DoodlePad-backend',
+            live: 'https://doodleme.netlify.app'
         }
     ];
 
