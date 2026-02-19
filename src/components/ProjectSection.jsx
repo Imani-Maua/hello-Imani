@@ -14,6 +14,24 @@ function ProjectSection({ layout = 'grid', hideTitle = false }) {
             live: 'https://mauaimani.netlify.app'
         },
         {
+            title: 'DoodleMe (frontend)',
+            stack: 'React, Vite, TailwindCSS, Context API',
+            start: 'Dec 2025',
+            end: 'Feb 2026',
+            desc: 'React SPA with JWT-based auth, Context API for state management, protected routing, real-time note search, and beautiful UI built with TailwindCSS.',
+            github: 'https://github.com/Imani-Maua/DoodlePad',
+            live: 'https://doodleme.netlify.app'
+        },
+        {
+            title: 'DoodleMe (Backend)',
+            stack: 'Node.js, Express, Prisma, MongoDB Atlas',
+            start: 'Dec 2025',
+            end: 'Feb 2026',
+            desc: 'REST API for a personal notes app with JWT authentication, bcrypt password hashing, rate limiting, and security headers. Migrated from Mongoose to Prisma ORM.',
+            github: 'https://github.com/Imani-Maua/DoodlePad-backend',
+            live: 'https://doodleme.netlify.app'
+        },
+        {
             title: 'SlotMeIn',
             stack: 'FastAPI (Python), PostgreSQL, SQLAlchemy, JWT',
             start: 'July 2025',
@@ -39,25 +57,8 @@ function ProjectSection({ layout = 'grid', hideTitle = false }) {
             desc: 'A modern React dashboard providing real-time performance analytics and automated sales bonus visualizations. It replaces manual Excel workflows with a production-ready interface, reducing payout processing time by 50%.',
             github: 'https://github.com/Imani-Maua/TopShelf-frontend',
             live: ''
-        },
-        {
-            title: 'DoodleMe (frontend)',
-            stack: 'React, Vite, TailwindCSS, Context API',
-            start: 'Dec 2025',
-            end: 'Feb 2026',
-            desc: 'React SPA with JWT-based auth, Context API for state management, protected routing, real-time note search, and beautiful UI built with TailwindCSS.',
-            github: 'https://github.com/Imani-Maua/DoodlePad',
-            live: 'https://doodleme.netlify.app'
-        },
-        {
-            title: 'DoodleMe (Backend)',
-            stack: 'Node.js, Express, Prisma, MongoDB Atlas',
-            start: 'Dec 2025',
-            end: 'Feb 2026',
-            desc: 'REST API for a personal notes app with JWT authentication, bcrypt password hashing, rate limiting, and security headers. Migrated from Mongoose to Prisma ORM.',
-            github: 'https://github.com/Imani-Maua/DoodlePad-backend',
-            live: 'https://doodleme.netlify.app'
         }
+        
     ];
 
     const containerClass = layout === 'list' ? styles.projectsList : styles.projectsGrid;
