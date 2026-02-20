@@ -14,6 +14,7 @@ function Hero() {
                     <img src={profile4}
                         alt="Maua Imani"
                         className={styles.profilePhoto} />
+                    <p className={styles.academicInfoMobile}>🧠 Learn • ☕ Coffee • 💻 Code • 🛠️ Build • 🔁 Repeat</p>
                 </div>
                 <div className={styles.heroDesc}>
                     <h1 className={styles.name}>Maua Imani</h1>
@@ -83,7 +84,7 @@ function Hero() {
                     </ul>
                 </div>
 
-                
+
             </div>
 
             <ResumeModal
