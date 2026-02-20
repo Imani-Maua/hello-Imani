@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './Hero.module.scss';
-import profile3 from '../assets/Profile3.png';
+import profile4 from '../assets/Profile4.jpg';
 import ResumeModal from './ResumeModal';
 
 function Hero() {
@@ -11,7 +11,7 @@ function Hero() {
         <section className={styles.hero}>
             <div className={styles.heroHeading}>
                 <div className={styles.profilePhotoContainer}>
-                    <img src={profile3}
+                    <img src={profile4}
                         alt="Maua Imani"
                         className={styles.profilePhoto} />
                 </div>
