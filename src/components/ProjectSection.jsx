@@ -11,7 +11,7 @@ function ProjectSection({ layout = 'grid', hideTitle = false }) {
             end: 'Present',
             desc: 'A responsive portfolio site showcasing my software engineering projects, technical skills, and creative personality.',
             github: 'https://github.com/Imani-Maua/HeyImani',
-            live: 'https://helloimani.vercel.app'
+            live: 'https://hello-imani.vercel.app'
         },
         {
             title: 'DoodleMe (frontend)',
