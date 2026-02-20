@@ -35,6 +35,7 @@ export const workExperiences = [
             "Participated in code reviews and iterative development, strengthening system reliability and maintainability in a production environment."
         ]
     }
+    
 ];
 
 export const extracurriculars = [

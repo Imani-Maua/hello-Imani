@@ -1,6 +1,6 @@
 # Maua Imani
 
-**HeyImani** is my digital introduction, not only as a software engineer, but also as a quirky, fun-loving, young spirit who happens to love pink quite a lot. Through HeyImani, I showcase who I am, what I build, what I am building, and hopefully, it encourages us to connect!
+**MauaImani** is my digital introduction, not only as a software engineer, but also as a quirky, fun-loving, young spirit who happens to love pink quite a lot. Through HeyImani, I showcase who I am, what I build, what I am building, and hopefully, it encourages us to connect!
 
 ---
 
