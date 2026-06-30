@@ -1,5 +1,5 @@
 export const workExperiences = [
-    {
+     {
         title: "SWE Fellow - WiseWomenCode",
         company: "Wise",
         startDate: "Feb 2026",
@@ -9,6 +9,18 @@ export const workExperiences = [
             "Collaborated with Wisers + peers to build a Java-based money transfer service",
             "Attended interactive sessions focused technical SWE interview skills and tech talks"
         ]
+    },
+    {
+        title: "Software Engineer - Intern",
+        company: "Cloud9 Money",
+        startDate: "June 2026",
+        endDate: "Present",
+        description: [
+    "1 of 3 backend engineers developing Cloud9's core distributed backend services.",
+    "Designed and built production microservices in Go using gRPC, REST APIs, PostgreSQL, and Redis.",
+    "Developed backend systems responsible for transaction processing, data consistency, and reliable service communication.",
+    "Collaborated on the design, implementation, testing, and deployment of scalable backend infrastructure."
+]
     },
     {
         title: "Teaching Assistant",
