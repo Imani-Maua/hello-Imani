@@ -1,16 +1,5 @@
 export const workExperiences = [
      {
-        title: "SWE Fellow - WiseWomenCode",
-        company: "Wise",
-        startDate: "Feb 2026",
-        endDate: "Feb 2026",
-        description: [
-            "17/100 applicants selected to attend a 3-day intensive program at Wise Budapest's Budapest office.",
-            "Collaborated with Wisers + peers to build a Java-based money transfer service",
-            "Attended interactive sessions focused technical SWE interview skills and tech talks"
-        ]
-    },
-    {
         title: "Software Engineer - Intern",
         company: "Cloud9 Money",
         startDate: "June 2026",
@@ -21,6 +10,17 @@ export const workExperiences = [
     "Developed backend systems responsible for transaction processing, data consistency, and reliable service communication.",
     "Collaborated on the design, implementation, testing, and deployment of scalable backend infrastructure."
 ]
+    }, 
+    {
+        title: "SWE Fellow - WiseWomenCode",
+        company: "Wise",
+        startDate: "Feb 2026",
+        endDate: "Feb 2026",
+        description: [
+            "17/100 applicants selected to attend a 3-day intensive program at Wise Budapest's Budapest office.",
+            "Collaborated with Wisers + peers to build a Java-based money transfer service",
+            "Attended interactive sessions focused technical SWE interview skills and tech talks"
+        ]
     },
     {
         title: "Teaching Assistant",
