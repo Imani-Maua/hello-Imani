@@ -1,7 +1,7 @@
 export const workExperiences = [
      {
         title: "Software Engineer - Intern",
-        company: "Cloud9 Money",
+        company: "Cloud9 Money, Nairobi, KE",
         startDate: "June 2026",
         endDate: "Present",
         description: [
@@ -13,57 +13,49 @@ export const workExperiences = [
     }, 
     {
         title: "SWE Fellow - WiseWomenCode",
-        company: "Wise",
+        company: "Wise, Budapest, HU",
         startDate: "Feb 2026",
         endDate: "Feb 2026",
         description: [
-            "17/100 applicants selected to attend a 3-day intensive program at Wise Budapest's Budapest office.",
-            "Collaborated with Wisers + peers to build a Java-based money transfer service",
-            "Attended interactive sessions focused technical SWE interview skills and tech talks"
-        ]
+  "Selected as 1 of 100 applicants for a competitive engineering fellowship hosted at Wise in Budapest.",
+  "Built a Java-based money transfer service as part of a team-based engineering challenge.",
+  "Participated in technical workshops on distributed systems, backend architecture, and SWE interview preparation."
+]
     },
     {
-        title: "Teaching Assistant",
+        title: "Peer Tutor",
         company: "University of Debrecen",
         startDate: "Sep 2024",
-        endDate: "Dec 2024",
+        endDate: "Feb 2025",
         description: [
-            "Supported 50+ undergraduate students in understanding core Operating Systems concepts, including process scheduling, memory management, and file systems.",
-            "Guided students in debugging C programs using tools such as gdb, valgrind, and Linux system calls.",
-            "Reinforced practical understanding of OS internals through hands-on labs and one-on-one technical support.",
-            "Helped bridge theory and practice, improving students' confidence in low-level systems programming."
-        ]
+  "Supported 50+ undergraduate students in core Operating Systems concepts including scheduling, memory management, and file systems.",
+  "Designed and delivered weekend lectures on computational theory topics such as decidability, complexity classes, reductions, and NP-completeness.",
+  "Provided hands-on guidance through labs and one-on-one mentoring to reinforce systems programming concepts.",
+  "Helped bridge theoretical and practical understanding of operating systems, improving student confidence in low-level programming."
+]
     },
-    {
-        title: "Software Engineering Intern",
-        company: "AkiraChix",
-        startDate: "Dec 2023",
-        endDate: "Jul 2024",
-        description: [
-            "Built and maintained backend services for AfyaLink, a digital health platform delivering real-time immunization alerts and outbreak notifications to underserved communities.",
-            "Designed and implemented RESTful APIs using FastAPI, applying Pydantic models for request validation and data integrity.",
-            "Integrated backend services with relational databases, ensuring reliable data persistence and efficient query handling.",
-            "Collaborated in a cross-functional, 4-person engineering team, contributing to feature design, implementation, and testing.",
-            "Participated in code reviews and iterative development, strengthening system reliability and maintainability in a production environment."
-        ]
-    }
     
 ];
 
 export const extracurriculars = [
     {
-        title: "Peer Lead",
-        company: "AkiraChix",
+        title: "Alumni Mentor",
+        company: "St Brigid's Girls High School - Alma Mater",
         startDate: "Feb 2024",
         endDate: "Present",
-        description: "Served as a mentor to high school graduates interested in pursuing careers in technology, providing guidance on computer science fundamentals, academic pathways, and career development through online workshops and bootcamps focused on building confidence, problem-solving skills, and readiness for university-level computer science."
+        description: [
+  "Mentor high school students interested in technology, delivering online workshops and bootcamps on computer science fundamentals and university preparation.",
+  "Co-founded a career guidance initiative with alumni, supporting students with university applications, degree selection, scholarships, and long-term career planning."
+]
     },
     {
         title: "Club Member",
         company: "Green Tech",
         startDate: "Jan 2026",
         endDate: "Present",
-        description: ["Collaborated with peers to explore the intersection of technology and sustainability.",
-            "Engage in projects and activities that focus on green innovation, environmental awareness, and the development of tech-based solutions to real-world ecological issues."]
+        description: [
+  "Collaborated with peers to explore the intersection of technology and sustainability.",
+  "Worked on initiatives focused on green innovation, environmental awareness, and tech-driven solutions to ecological challenges."
+]
     }
 ];
