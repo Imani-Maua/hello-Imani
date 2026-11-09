@@ -1,0 +1,16 @@
+@use '../styles/variables.scss' as *;
+
+.section {
+    padding: 4rem 2em 5rem;
+    background: $bg-offwhite;
+}
+
+.label {
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    font-weight: 400;
+    color: $text-primary;
+    opacity: 0.6;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+}
