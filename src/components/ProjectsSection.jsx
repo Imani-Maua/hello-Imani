@@ -24,7 +24,7 @@ function ProjectsSection() {
     if (!projects.length) return null;
 
     return (
-        <section className={styles.section}>
+        <section id="projects" className={styles.section}>
             <p className={styles.label}>Problems I've Solved</p>
             <div className={styles.grid}>
                 {projects.map((proj) => (
