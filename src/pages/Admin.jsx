@@ -19,6 +19,7 @@ function Admin() {
     const navigate = useNavigate();
     const { state: draft, seed, add, updateItem, removeItem, stageObj, push, hasDraft } = useDraft();
     const [pushing, setPushing] = useState(false);
+    const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [activePage, setActivePage] = useState('dashboard');
     const [editingProfile, setEditingProfile] = useState(false);
     const [activeForm, setActiveForm] = useState(null);
@@ -194,7 +195,14 @@ function Admin() {
             <div className={styles.layout}>
 
                 {/* SIDEBAR — navigation only */}
-                <aside className={styles.sidebar}>
+                <aside className={`${styles.sidebar} ${sidebarCollapsed ? styles.sidebarCollapsed : ''}`}>
+                    <button
+                        className={styles.sidebarToggle}
+                        onClick={() => setSidebarCollapsed(c => !c)}
+                        aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                    >
+                        {sidebarCollapsed ? '→' : '←'}
+                    </button>
                     <button
                         className={`${styles.navItem} ${activePage === 'profile' ? styles.navItemActive : ''}`}
                         onClick={() => setActivePage('profile')}
