@@ -8,6 +8,7 @@ import Projects from './pages/Projects';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
 import { AuthProvider } from './context/AuthContext';
+import { DraftProvider } from './context/DraftContext';
 import PreviewBar from './components/PreviewBar';
 
 function MainLayout() {
@@ -25,6 +26,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <DraftProvider>
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route path='/admin' element={<Admin />} />
@@ -35,6 +37,7 @@ function App() {
             <Route path='/projects' element={<Projects />} />
           </Route>
         </Routes>
+        </DraftProvider>
       </AuthProvider>
     </BrowserRouter>
   );
