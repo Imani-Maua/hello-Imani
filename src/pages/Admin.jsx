@@ -6,6 +6,7 @@ import styles from './Admin.module.scss';
 
 const toArr = str => str.split(',').map(s => s.trim()).filter(Boolean);
 const fromArr = arr => (arr || []).join(', ');
+const n = val => (val === '' || val === undefined) ? null : val;
 
 const BLANK_EXP = { company: '', title: '', location: '', start_date: '', end_date: '', is_current: false, description: '', achievements: '', technologies: '' };
 const BLANK_PROJ = { name: '', description: '', url: '', repo_url: '', start_date: '', end_date: '', technologies: '', highlights: '' };
@@ -56,7 +57,8 @@ function Admin() {
     async function saveProfile(e) {
         e.preventDefault();
         try {
-            await authedRequest('PATCH', `/candidates/${candidateId}`, profileForm);
+            const body = { ...profileForm, phone: n(profileForm.phone), location: n(profileForm.location), headline: n(profileForm.headline), summary: n(profileForm.summary) };
+            await authedRequest('PATCH', `/candidates/${candidateId}`, body);
             alert('Profile saved!');
         } catch (e) { console.error(e); }
     }
@@ -68,7 +70,7 @@ function Admin() {
     }
     async function saveExperience(e) {
         e.preventDefault();
-        const body = { ...expForm, achievements: toArr(expForm.achievements), technologies: toArr(expForm.technologies) };
+        const body = { company: expForm.company, title: expForm.title, location: n(expForm.location), start_date: n(expForm.start_date), end_date: expForm.is_current ? null : n(expForm.end_date), is_current: expForm.is_current, description: n(expForm.description), achievements: toArr(expForm.achievements), technologies: toArr(expForm.technologies) };
         try {
             if (editingExp) await authedRequest('PATCH', `/candidates/${candidateId}/work-experiences/${editingExp}`, body);
             else await authedRequest('POST', `/candidates/${candidateId}/work-experiences`, body);
@@ -92,7 +94,7 @@ function Admin() {
     }
     async function saveProject(e) {
         e.preventDefault();
-        const body = { ...projForm, technologies: toArr(projForm.technologies), highlights: toArr(projForm.highlights) };
+        const body = { name: projForm.name, description: n(projForm.description), url: n(projForm.url), repo_url: n(projForm.repo_url), start_date: n(projForm.start_date), end_date: n(projForm.end_date), technologies: toArr(projForm.technologies), highlights: toArr(projForm.highlights) };
         try {
             if (editingProj) await authedRequest('PATCH', `/candidates/${candidateId}/projects/${editingProj}`, body);
             else await authedRequest('POST', `/candidates/${candidateId}/projects`, body);
@@ -116,7 +118,7 @@ function Admin() {
     }
     async function saveSkill(e) {
         e.preventDefault();
-        const body = { name: skillForm.name, category: skillForm.category, proficiency: skillForm.proficiency || null, years_experience: skillForm.years_experience ? parseInt(skillForm.years_experience) : null };
+        const body = { name: skillForm.name, category: skillForm.category, proficiency: n(skillForm.proficiency), years_experience: skillForm.years_experience ? parseInt(skillForm.years_experience) : null };
         try { await authedRequest('POST', `/candidates/${candidateId}/skills`, body); setSkillForm(BLANK_SKILL); loadSkills(); }
         catch (e) { console.error(e); }
     }
