@@ -15,7 +15,14 @@ function WorkSection() {
 
     useEffect(() => {
         publicGet(`/candidates/${CANDIDATE_ID}/work-experiences`)
-            .then(setExperiences)
+            .then(data => {
+                const sorted = [...data].sort((a, b) => {
+                    const aDate = a.start_date ? new Date(a.start_date) : new Date(0);
+                    const bDate = b.start_date ? new Date(b.start_date) : new Date(0);
+                    return bDate - aDate;
+                });
+                setExperiences(sorted);
+            })
             .catch(() => {});
     }, []);
 
