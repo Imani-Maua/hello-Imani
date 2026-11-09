@@ -1,0 +1,46 @@
+@use "../styles/variables.scss" as *;
+
+.projectSection {
+    padding: 2.5rem 1.5rem; // Scaled down
+    width: 100%;
+}
+
+.sectionTitle {
+    font-size: 1.15rem; // Scaled down
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid $brand-pink;
+    width: 100%;
+}
+
+.projectsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.projectsList {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .projectsGrid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .projectSection {
+        padding: 2rem 1rem;
+    }
+
+    .projectsGrid {
+        grid-template-columns: 1fr;
+    }
+}

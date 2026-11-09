@@ -1,0 +1,20 @@
+@use "../styles/variables.scss" as *;
+
+.experienceSection {
+    padding: 2rem;
+    width: 100%;
+}
+
+.sectionTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid $brand-pink; // Thinner for a higher-end feel
+}
+
+.cardsContainer {
+    display: flex;
+    flex-direction: column;
+}

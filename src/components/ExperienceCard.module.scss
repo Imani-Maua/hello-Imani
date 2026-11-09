@@ -1,0 +1,122 @@
+@use "../styles/variables.scss" as *;
+
+.experienceCard {
+    background: #ffffff;
+    border: 2px solid $border-gray;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+
+    &:hover {
+        border-color: $brand-pink;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.15);
+        transform: translateY(-0.8px);
+    }
+
+    &.expanded {
+        border-color: $brand-pink;
+    }
+}
+
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+
+
+.titleSection {
+    flex: 1;
+}
+
+.title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 0.2rem 0;
+}
+
+
+
+.company {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $brand-pink;
+    margin: 0 0 0.2rem 0;
+}
+
+.type {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: #6b7280;
+    background: #f3f4f6;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    margin-top: 0.25rem;
+}
+
+.dateSection {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.duration {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0 0 0.25rem 0;
+}
+
+.dates {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin: 0 0 0.25rem 0;
+}
+
+.location {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin: 0;
+}
+
+.desktopOnly {
+    @media (max-width: 768px) {
+        display: none !important;
+    }
+}
+
+.details {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba($border-gray, 0.5);
+    animation: slideDown 0.3s ease;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+    .experienceCard {
+        padding: 1.25rem;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .dateSection {
+        text-align: left;
+    }
+
+    .duration,
+    .dates,
+    .location {
+        font-size: 0.75rem;
+    }
+}

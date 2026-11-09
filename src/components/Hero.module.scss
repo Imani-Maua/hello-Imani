@@ -1,0 +1,200 @@
+@use "../styles/variables.scss" as *;
+
+.hero {
+    max-width: 1000px;
+    text-align: left;
+    padding: 2.5rem 1.5rem; // Scaled down
+}
+
+.profilePhotoContainer {
+    margin-bottom: 1.25rem;
+}
+
+.profilePhoto {
+    width: 180px; // Scaled down
+    height: 180px;
+    object-fit: cover;
+    border-radius: 60%;
+    border: 3px solid $brand-pink;
+    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.15);
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.03);
+    }
+}
+
+.heroHeading {
+    display: flex;
+    gap: $spacing-lg;
+    align-items: center;
+    margin-bottom: 2rem;
+
+}
+
+.heroDesc {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.name {
+    font-size: 2rem; // Scaled down from 2.5rem
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.tagline {
+    background-color: $brand-pink;
+    color: $bg-white;
+    text-align: center;
+    padding: 0.35rem 1rem; // Scaled down
+    max-width: 250px;
+    border-radius: 80px;
+    font-weight: 600;
+    font-size: 0.9rem; // Scaled down
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.2);
+}
+
+.academicInfo {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin: 0;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+}
+
+.academicInfoMobile {
+    display: none;
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin: 0.5rem 0 0 0;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.socials {
+    display: flex;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+}
+
+.socialButton {
+    padding: 0.5rem 1rem; // Scaled down
+    background-color: $bg-white;
+    border: 1.5px solid $border-gray;
+    border-radius: 8px;
+    text-decoration: none;
+    color: $text-primary;
+    font-weight: 500;
+    font-size: 0.85rem; // Scaled down
+    transition: all 0.2s ease;
+    display: inline-block;
+
+    &:hover {
+        border-color: $brand-pink;
+        color: $brand-pink;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(236, 72, 153, 0.1);
+    }
+}
+
+.intro {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background-color: rgba(255, 255, 255, 0.5); // More subtle
+    border-left: 3px solid $brand-pink;
+    border-radius: 8px;
+
+    .techStack {
+        display: inline-block;
+        margin: 0 auto;
+    }
+
+    p {
+        margin: 0.6rem 0;
+        line-height: 1.5;
+        color: #4b5563;
+        font-size: 0.85rem; // Scaled down
+
+        &:first-child {
+            font-size: 1rem; // Scaled down from 1.125
+            font-weight: 600;
+            color: $text-primary;
+        }
+
+        &:nth-child(6) {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: $brand-pink;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0.75rem 0;
+
+        li {
+            padding-left: 1.5rem;
+            margin: 0.4rem 0;
+            position: relative;
+            color: #4b5563;
+            font-size: 0.85rem;
+            line-height: 1.5;
+
+            &::before {
+                content: "🐾";
+                position: absolute;
+                left: 0;
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero {
+        padding: 1.5rem 1rem;
+    }
+
+    .heroHeading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .profilePhotoContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profilePhoto {
+        width: 120px;
+        height: 120px;
+    }
+
+    // Hide the academicInfo that sits inside heroDesc on tablet/mobile
+    .academicInfo {
+        display: none;
+    }
+
+    // Show the one below the photo instead
+    .academicInfoMobile {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .name {
+        font-size: 1.6rem;
+    }
+}

@@ -1,0 +1,130 @@
+@use "../styles/variables.scss" as *;
+
+.favoritesSection {
+    width: 100%;
+    padding: 2rem;
+}
+
+.carouselContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    cursor: grab;
+    overflow: hidden;
+    position: relative;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.navButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid $border-gray;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: $text-primary;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+
+    &:hover {
+        background: $brand-pink;
+        color: white;
+        border-color: $brand-pink;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+    }
+}
+
+.prevButton {
+    left: 1rem;
+}
+
+.nextButton {
+    right: 1rem;
+}
+
+.carouselTrack {
+    display: flex;
+    width: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carouselSlide {
+    flex: 0 0 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem; // Small padding to let shadows show
+}
+
+.favoritesTitle {
+    font-size: 1.15rem; // Scaled down
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid $brand-pink;
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem; // Scaled down
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #e5e7eb;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+
+    &:hover {
+        background-color: #d1d5db;
+    }
+}
+
+.activeDot {
+    background-color: $brand-pink;
+    width: 12px;
+    height: 12px;
+}
+
+.counter {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+
+@media (max-width: 768px) {
+    .favoritesSection {
+        padding: 1.5rem 1rem;
+    }
+
+    .card {
+        padding: 2rem 1.5rem;
+        min-height: 200px;
+    }
+
+    .favoritesTitle {
+        font-size: 1.15rem;
+    }
+}
