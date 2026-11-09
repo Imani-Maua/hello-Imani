@@ -130,12 +130,10 @@ function ExperienceLanding() {
             <div className={styles.content}>
                 <p className={styles.greeting}>Hello, My name is</p>
                 <h1 className={styles.name}>Maua Elaine Imani</h1>
-                <p className={styles.enjoy}>
-                    I enjoy{' '}
-                    <span className={styles.word}>
-                        {displayText}
-                        <span className={styles.cursor}>|</span>
-                    </span>
+                <p className={styles.enjoy}>I enjoy</p>
+                <p className={styles.typewriterLine}>
+                    <span className={styles.word}>{displayText}</span>
+                    <span className={styles.cursor}>|</span>
                 </p>
             </div>
 
