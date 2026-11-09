@@ -68,21 +68,31 @@ const motifs = [
 ];
 
 function ExperienceLanding() {
+    const [displayText, setDisplayText] = useState('');
     const [wordIndex, setWordIndex] = useState(0);
-    const [visible, setVisible] = useState(true);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
-        const pause = setTimeout(() => {
-            setVisible(false);
-            const swap = setTimeout(() => {
-                setWordIndex((prev) => (prev + 1) % words.length);
-                setVisible(true);
-            }, 450);
-            return () => clearTimeout(swap);
-        }, 2800);
+        const currentWord = words[wordIndex];
+        let timeout;
 
-        return () => clearTimeout(pause);
-    }, [wordIndex]);
+        if (!isDeleting && displayText === currentWord) {
+            timeout = setTimeout(() => setIsDeleting(true), 1500);
+        } else if (isDeleting && displayText === '') {
+            setIsDeleting(false);
+            setWordIndex((prev) => (prev + 1) % words.length);
+        } else {
+            timeout = setTimeout(() => {
+                setDisplayText(
+                    isDeleting
+                        ? currentWord.slice(0, displayText.length - 1)
+                        : currentWord.slice(0, displayText.length + 1)
+                );
+            }, isDeleting ? 55 : 95);
+        }
+
+        return () => clearTimeout(timeout);
+    }, [displayText, isDeleting, wordIndex]);
 
     return (
         <section className={styles.landing}>
@@ -122,8 +132,9 @@ function ExperienceLanding() {
                 <h1 className={styles.name}>Maua Elaine Imani</h1>
                 <p className={styles.enjoy}>
                     I enjoy{' '}
-                    <span className={`${styles.word} ${visible ? styles.wordVisible : styles.wordHidden}`}>
-                        {words[wordIndex]}
+                    <span className={styles.word}>
+                        {displayText}
+                        <span className={styles.cursor}>|</span>
                     </span>
                 </p>
             </div>
