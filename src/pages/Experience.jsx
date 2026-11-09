@@ -1,5 +1,4 @@
 import ExperienceSection from '../components/ExperienceSection';
-import { workExperiences } from '../data/experiences';
 import styles from './Page.module.scss';
 
 function Experience() {
@@ -9,10 +8,7 @@ function Experience() {
         <h1>Work Experience</h1>
       </header>
 
-      <ExperienceSection
-        experiences={workExperiences}
-        hideTitle={true}
-      />
+      <ExperienceSection hideTitle={true} />
     </div>
   );
 }
