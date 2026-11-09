@@ -1,5 +1,9 @@
 @use './styles/variables.scss' as *;
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --font-logo: "Oi", "Shrikhand", cursive;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
