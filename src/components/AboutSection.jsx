@@ -19,6 +19,9 @@ function AboutSection() {
                     <p className={styles.aboutProse}>
                         I love building things that simplify complicated processes, remove unnecessary friction, and make people's lives easier. Tech is fun, especially when you see the difference you've made.
                     </p>
+                    <p className={styles.aboutProse}>
+                        Occasionally, I close my laptop and become a person. Occasionally.
+                    </p>
                 </div>
             </div>
         </section>
