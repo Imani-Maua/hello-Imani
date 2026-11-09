@@ -61,6 +61,23 @@
     opacity: 0.85;
 }
 
+.links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: $text-primary;
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 1; }
+}
+
 .imageSide {
     flex-shrink: 0;
 }
