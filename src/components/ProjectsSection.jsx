@@ -1,17 +1,25 @@
 import { useState, useEffect } from 'react';
 import styles from './ProjectsSection.module.scss';
 import { publicGet } from '../services/api';
+import { useAuth } from '../context/AuthContext';
+import { useDraft } from '../context/DraftContext';
 
 const CANDIDATE_ID = 1;
 
 function ProjectsSection() {
+    const { isAuthed } = useAuth();
+    const { state: draft } = useDraft();
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        publicGet(`/candidates/${CANDIDATE_ID}/projects`)
-            .then(setProjects)
-            .catch(() => {});
-    }, []);
+        if (isAuthed && draft.entities.projects !== undefined) {
+            setProjects(draft.entities.projects);
+        } else {
+            publicGet(`/candidates/${CANDIDATE_ID}/projects`)
+                .then(setProjects)
+                .catch(() => {});
+        }
+    }, [isAuthed, draft.entities.projects]);
 
     if (!projects.length) return null;
 
