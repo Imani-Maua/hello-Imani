@@ -11,6 +11,14 @@ function AboutSection() {
                     </div>
                 </div>
                 <div className={styles.textSide}>
+                    <p className={styles.aboutLabel}>About Me</p>
+                    <h2 className={styles.aboutHeadline}>I love solving problems</h2>
+                    <p className={styles.aboutProse}>
+                        It's a fairly convenient arrangement: I get something to obsess over for the next couple of weeks or months, and someone else gets a better day because of it.
+                    </p>
+                    <p className={styles.aboutProse}>
+                        I love building things that simplify complicated processes, remove unnecessary friction, and make people's lives easier. Tech is fun, especially when you see the difference you've made.
+                    </p>
                 </div>
             </div>
         </section>
