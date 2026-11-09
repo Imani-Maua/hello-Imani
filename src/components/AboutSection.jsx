@@ -3,17 +3,17 @@ import styles from './AboutSection.module.scss';
 
 function AboutSection() {
     return (
-        <>
-            <div className={styles.divider}>
-                <div className={styles.dividerLineLeft} />
-                <div className={styles.dividerLineRight} />
-            </div>
-            <section className={styles.section}>
-                <div className={styles.imageWrapper}>
-                    <img src={profileImg} alt="Maua Elaine Imani" className={styles.image} />
+        <section className={styles.section}>
+            <div className={styles.card}>
+                <div className={styles.textSide}>
                 </div>
-            </section>
-        </>
+                <div className={styles.imageSide}>
+                    <div className={styles.imageWrapper}>
+                        <img src={profileImg} alt="Maua Elaine Imani" className={styles.image} />
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 }
 
