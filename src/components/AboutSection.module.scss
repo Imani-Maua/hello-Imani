@@ -1,7 +1,6 @@
 @use '../styles/variables.scss' as *;
 
 .section {
-    min-height: 100vh;
     display: flex;
     align-items: flex-start;
     padding: calc(3rem + 4vh) 2em 2rem;
