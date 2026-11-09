@@ -83,7 +83,10 @@
 }
 
 .availableCard {
-    margin-top: 1.5rem;
+    position: absolute;
+    bottom: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
     background: rgba(212, 165, 165, 0.1);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -91,8 +94,9 @@
     border-radius: 20px;
     padding: 1.25rem 1.5rem;
     max-width: 300px;
-    width: 100%;
+    width: calc(100% - 4rem);
     text-align: left;
+    z-index: 1;
 }
 
 .availableHeader {
