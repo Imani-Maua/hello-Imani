@@ -97,6 +97,17 @@
     width: calc(100% - 4rem);
     text-align: left;
     z-index: 1;
+
+    @media (max-width: 600px) {
+        left: auto;
+        right: 1.25rem;
+        bottom: 1.5rem;
+        transform: none;
+        width: auto;
+        max-width: none;
+        padding: 0.6rem 1rem;
+        border-radius: 999px;
+    }
 }
 
 .availableHeader {
@@ -127,12 +138,16 @@
     color: $text-primary;
     line-height: 1.6;
     margin: 0 0 1rem 0;
+
+    @media (max-width: 600px) { display: none; }
 }
 
 .cardDivider {
     height: 1px;
     background: rgba(212, 165, 165, 0.25);
     margin-bottom: 1rem;
+
+    @media (max-width: 600px) { display: none; }
 }
 
 .hireButton {
@@ -145,9 +160,9 @@
     font-size: 0.95rem;
     transition: opacity 0.2s ease;
 
-    &:hover {
-        opacity: 0.75;
-    }
+    &:hover { opacity: 0.75; }
+
+    @media (max-width: 600px) { display: none; }
 }
 
 .hireArrow {
