@@ -4,6 +4,9 @@ import { publicGet } from '../services/api';
 
 const CANDIDATE_ID = 1;
 
+const WORK_TYPE_LABEL = { hybrid: 'Hybrid', in_person: 'In Person', remote: 'Remote' };
+const EMPLOYMENT_TYPE_LABEL = { full_time: 'Full Time', part_time: 'Part Time', internship: 'Internship', fellowship: 'Fellowship', research: 'Research' };
+
 function formatDate(iso) {
     if (!iso) return null;
     const d = new Date(iso);
@@ -44,10 +47,10 @@ function WorkSection() {
                                 {exp.company && <span className={styles.dot}> • </span>}
                                 {exp.company && <span>{exp.company}</span>}
                                 {exp.work_type && <span className={styles.dot}> • </span>}
-                                {exp.work_type && <span>{exp.work_type}</span>}
+                                {exp.work_type && <span>{WORK_TYPE_LABEL[exp.work_type] ?? exp.work_type}</span>}
                             </p>
                             <p className={styles.meta}>
-                                {exp.employment_type && <span>{exp.employment_type}</span>}
+                                {exp.employment_type && <span>{EMPLOYMENT_TYPE_LABEL[exp.employment_type] ?? exp.employment_type}</span>}
                                 {exp.employment_type && dateRange && <span className={styles.pipe}> | </span>}
                                 {dateRange && <span>{dateRange}</span>}
                             </p>
