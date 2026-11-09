@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './ExperienceLanding.module.scss';
 
-const words = ['solving problems', 'distributed systems', 'agentic building', 'programming', 'coffee'];
+const words = ['solving problems', 'distributed systems', 'agentic building', 'software engineering', 'programming', 'coffee'];
 
 const lines = [
     { top: '7%',  width: '150px', duration: '14s', delay: '0s',    type: 'LTR'  },
@@ -16,6 +16,14 @@ const lines = [
     { top: '79%', width: '95px',  duration: '10s', delay: '6s',    type: 'LTR'  },
     { top: '86%', width: '180px', duration: '13s', delay: '9s',    type: 'Diag' },
     { top: '93%', width: '130px', duration: '17s', delay: '2.5s',  type: 'RTL'  },
+    { top: '0',   left: '5%',   height: '120px', duration: '12s', delay: '0s',   type: 'TTB' },
+    { top: '0',   left: '15%',  height: '80px',  duration: '8s',  delay: '3s',   type: 'BTT' },
+    { top: '0',   left: '28%',  height: '160px', duration: '16s', delay: '1.5s', type: 'TTB' },
+    { top: '0',   left: '42%',  height: '100px', duration: '10s', delay: '6s',   type: 'BTT' },
+    { top: '0',   left: '58%',  height: '140px', duration: '14s', delay: '0.5s', type: 'TTB' },
+    { top: '0',   left: '72%',  height: '90px',  duration: '9s',  delay: '4s',   type: 'BTT' },
+    { top: '0',   left: '85%',  height: '170px', duration: '17s', delay: '2s',   type: 'TTB' },
+    { top: '0',   left: '95%',  height: '110px', duration: '11s', delay: '7s',   type: 'BTT' },
 ];
 
 const motifs = [
@@ -94,7 +102,9 @@ function ExperienceLanding() {
                     className={`${styles.line} ${styles[`line${line.type}`]}`}
                     style={{
                         top: line.top,
-                        width: line.width,
+                        left: line.left,
+                        width: line.width || '1px',
+                        height: line.height || '1px',
                         animationDuration: line.duration,
                         animationDelay: line.delay,
                     }}
