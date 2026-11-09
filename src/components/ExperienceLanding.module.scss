@@ -108,13 +108,8 @@
         max-width: none;
         padding: 0.6rem 1rem;
         border-radius: 999px;
-        cursor: pointer;
-
-        &:hover .hireButton {
-            max-width: 120px;
-            opacity: 1;
-            margin-left: 0.5rem;
-        }
+        display: flex;
+        align-items: center;
     }
 }
 
@@ -172,15 +167,7 @@
 
     &:hover { opacity: 0.75; }
 
-    @media (max-width: 1024px) {
-        max-width: 0;
-        opacity: 0;
-        overflow: hidden;
-        white-space: nowrap;
-        transition: max-width 0.25s ease, opacity 0.2s, margin-left 0.25s;
-        margin-left: 0;
-        gap: 0;
-    }
+    @media (max-width: 1024px) { display: none; }
 }
 
 .hireArrow {
@@ -200,8 +187,6 @@
         color: white;
         border-color: $brand-pink;
     }
-
-    @media (max-width: 1024px) { display: none; }
 }
 
 .line {
