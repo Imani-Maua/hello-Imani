@@ -5,12 +5,12 @@ function AboutSection() {
     return (
         <section className={styles.section}>
             <div className={styles.card}>
-                <div className={styles.textSide}>
-                </div>
                 <div className={styles.imageSide}>
                     <div className={styles.imageWrapper}>
                         <img src={profileImg} alt="Maua Elaine Imani" className={styles.image} />
                     </div>
+                </div>
+                <div className={styles.textSide}>
                 </div>
             </div>
         </section>
