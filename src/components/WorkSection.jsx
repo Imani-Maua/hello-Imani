@@ -52,7 +52,7 @@ function WorkSection() {
                             {exp.achievements?.length > 0 && (
                                 <ul className={styles.achievements}>
                                     {exp.achievements.map((a, i) => (
-                                        <li key={i}>{a}</li>
+                                        <li key={i}>{a.replaceAll(';', ',')}</li>
                                     ))}
                                 </ul>
                             )}
