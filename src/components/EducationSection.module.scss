@@ -1,0 +1,39 @@
+@use '../styles/variables.scss' as *;
+
+.section {
+    padding: 4rem 2em 5rem;
+    background: $bg-offwhite;
+}
+
+.label {
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    font-weight: 400;
+    color: $text-primary;
+    opacity: 0.6;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 1.5rem 0;
+}
+
+.university {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 0.4rem 0;
+}
+
+.degree {
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-weight: 500;
+    color: $text-primary;
+    margin: 0 0 1rem 0;
+}
+
+.date {
+    font-size: 0.9rem;
+    color: $text-primary;
+    opacity: 0.65;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
