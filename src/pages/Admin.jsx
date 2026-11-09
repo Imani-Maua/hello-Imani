@@ -187,28 +187,25 @@ function Admin() {
                 <button className={styles.logout} onClick={() => { logout(); navigate('/'); }}>Log out</button>
             </header>
 
-            <div className={styles.content}>
+            <div className={styles.layout}>
 
-                {/* PROFILE */}
-                <div className={styles.adminSection}>
-                    <div className={styles.sectionHeader}>
-                        <h2 className={styles.sectionTitle}>Profile</h2>
-                    </div>
+                {/* SIDEBAR */}
+                <aside className={styles.sidebar}>
+                    <h2 className={styles.sectionTitle}>Profile</h2>
                     <form className={styles.form} onSubmit={saveProfile}>
-                        <div className={styles.row}>
-                            <div className={styles.field}><label>First name</label><input value={profileForm.firstname} onChange={e => setProfileForm(f => ({ ...f, firstname: e.target.value }))} /></div>
-                            <div className={styles.field}><label>Last name</label><input value={profileForm.lastname} onChange={e => setProfileForm(f => ({ ...f, lastname: e.target.value }))} /></div>
-                        </div>
-                        <div className={styles.row}>
-                            <div className={styles.field}><label>Email</label><input type="email" value={profileForm.email} onChange={e => setProfileForm(f => ({ ...f, email: e.target.value }))} /></div>
-                            <div className={styles.field}><label>Phone</label><input value={profileForm.phone} onChange={e => setProfileForm(f => ({ ...f, phone: e.target.value }))} /></div>
-                        </div>
+                        <div className={styles.field}><label>First name</label><input value={profileForm.firstname} onChange={e => setProfileForm(f => ({ ...f, firstname: e.target.value }))} /></div>
+                        <div className={styles.field}><label>Last name</label><input value={profileForm.lastname} onChange={e => setProfileForm(f => ({ ...f, lastname: e.target.value }))} /></div>
+                        <div className={styles.field}><label>Email</label><input type="email" value={profileForm.email} onChange={e => setProfileForm(f => ({ ...f, email: e.target.value }))} /></div>
+                        <div className={styles.field}><label>Phone</label><input value={profileForm.phone} onChange={e => setProfileForm(f => ({ ...f, phone: e.target.value }))} /></div>
                         <div className={styles.field}><label>Location</label><input value={profileForm.location} onChange={e => setProfileForm(f => ({ ...f, location: e.target.value }))} /></div>
                         <div className={styles.field}><label>Headline</label><input value={profileForm.headline} onChange={e => setProfileForm(f => ({ ...f, headline: e.target.value }))} /></div>
                         <div className={styles.field}><label>Summary</label><textarea value={profileForm.summary} onChange={e => setProfileForm(f => ({ ...f, summary: e.target.value }))} /></div>
                         <div className={styles.formActions}><button type="submit" className={styles.btnPrimary}>Stage profile</button></div>
                     </form>
-                </div>
+                </aside>
+
+                {/* MAIN CONTENT */}
+                <div className={styles.mainContent}>
 
                 {/* EXPERIENCES */}
                 <div className={styles.adminSection}>
@@ -425,7 +422,8 @@ function Admin() {
                     </div>
                 </div>
 
-            </div>
+                </div>{/* end mainContent */}
+            </div>{/* end layout */}
 
             <div className={styles.previewPill}>
                 <span className={styles.previewPillLabel}>Editing as admin</span>
