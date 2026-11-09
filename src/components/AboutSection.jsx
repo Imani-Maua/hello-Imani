@@ -27,7 +27,7 @@ function AboutSection() {
     const linkedin = links.find(l => l.link_type === 'linkedin');
 
     return (
-        <section className={styles.section}>
+        <section id="about" className={styles.section}>
             <div className={styles.card}>
                 <div className={styles.imageSide}>
                     <div className={styles.imageWrapper}>
