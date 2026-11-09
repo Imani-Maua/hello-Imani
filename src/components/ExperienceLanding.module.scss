@@ -12,8 +12,8 @@
 
 .motif {
     position: absolute;
-    color: $text-primary;
-    opacity: 0.22;
+    color: #023e5e;
+    opacity: 0.45;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 500;
     animation-name: float;
@@ -37,8 +37,8 @@
 .greeting {
     font-size: clamp(0.8rem, 1.5vw, 1rem);
     font-weight: 400;
-    color: $text-primary;
-    opacity: 0.6;
+    color: white;
+    opacity: 0.75;
     margin: 0;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -47,7 +47,7 @@
 .name {
     font-size: clamp(2.8rem, 8vw, 5.5rem);
     font-weight: 700;
-    color: $text-primary;
+    color: white;
     margin: 0;
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -56,7 +56,7 @@
 .enjoy {
     font-size: clamp(1.2rem, 3vw, 2rem);
     font-weight: 500;
-    color: $text-primary;
+    color: white;
     margin: 0.25rem 0 0 0;
 }
 
