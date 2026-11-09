@@ -15,9 +15,8 @@ function Navbar() {
             </Link>
 
             <div className={styles.navigators}>
-                <NavLink to='/experience' className={({ isActive }) => isActive ? styles.activeNavLink : styles.navLink}>Experience</NavLink>
-                <NavLink to='/projects' className={({ isActive }) => isActive ? styles.activeNavLink : styles.navLink}>Projects</NavLink>
-                <NavLink to='/extracurriculars' className={({ isActive }) => isActive ? styles.activeNavLink : styles.navLink}>Extracurriculars</NavLink>
+                <a href="/#work" className={styles.navLink}>Experience</a>
+                <a href="/#projects" className={styles.navLink}>Projects</a>
             </div>
 
             <div className={styles.contactCard}>
@@ -35,10 +34,9 @@ function Navbar() {
                     <div className={styles.overlayContent}>
                         <div className={styles.closeIcon} onClick={toggleMenu}>✕</div>
                         <div className={styles.mobileLinks}>
-                            <NavLink to='/experience' onClick={closeMenu} className={styles.navLink}>Experience</NavLink>
-                            <NavLink to='/projects' onClick={closeMenu} className={styles.navLink}>Projects</NavLink>
-                            <NavLink to='/extracurriculars' onClick={closeMenu} className={styles.navLink}>Extracurriculars</NavLink>
-                            <a href="mailto:elainemaua644@gmail.com" className={styles.mobileContactLink} onClick={closeMenu}>
+                            <a href="/#work" className={styles.navLink} onClick={closeMenu}>Experience</a>
+                            <a href="/#projects" className={styles.navLink} onClick={closeMenu}>Projects</a>
+                            <a href="mailto:mauaelaineimani@gmail.com" className={styles.mobileContactLink} onClick={closeMenu}>
                                 Contact Me
                             </a>
                         </div>
