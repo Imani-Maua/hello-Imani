@@ -31,8 +31,35 @@
 .textSide {
     flex: 1;
     color: $text-primary;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.aboutLabel {
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    font-weight: 400;
+    color: $text-primary;
+    opacity: 0.6;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.aboutHeadline {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.aboutProse {
     font-size: 0.95rem;
     line-height: 1.8;
+    color: $text-primary;
+    margin: 0;
+    opacity: 0.85;
 }
 
 .imageSide {
