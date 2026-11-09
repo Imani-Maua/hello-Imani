@@ -56,28 +56,6 @@
     font-size: 0.95rem;
 }
 
-.contactCard {
-    @media (max-width: 768px) {
-        display: none;
-    }
-
-    button {
-        background-color: $brand-pink;
-        color: white;
-        padding: 0.4rem 1.25rem; // Scaled down
-        border: none;
-        border-radius: 0.5rem;
-        font-weight: 500;
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-
-        &:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
-        }
-    }
-}
 
 .mobileMenuIcon {
     display: none;
@@ -142,17 +120,6 @@
     }
 }
 
-.mobileContactLink {
-    margin-top: 1rem;
-    background-color: $brand-pink;
-    color: white;
-    padding: 0.75rem 2.5rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
-}
 
 @keyframes fadeInDown {
     from {

@@ -1,0 +1,79 @@
+@use '../styles/variables.scss' as *;
+
+.section {
+    padding: 1.5rem 2em 5rem;
+    background: transparent;
+}
+
+.wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+
+.eduInfo {
+    flex-shrink: 0;
+}
+
+.divider {
+    width: 1px;
+    align-self: stretch;
+    background: $text-primary;
+    opacity: 0.15;
+    margin: 0 2em;
+    flex-shrink: 0;
+}
+
+.coursework {
+    flex: 1;
+}
+
+.courseworkLabel {
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    font-weight: 400;
+    color: white;
+    opacity: 0.6;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 0.75rem 0;
+}
+
+.courseworkProse {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: white;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.label {
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    font-weight: 600;
+    color: $text-primary;
+    opacity: 0.6;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 1.5rem 0;
+}
+
+.university {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.4rem 0;
+}
+
+.degree {
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-weight: 500;
+    color: white;
+    margin: 0 0 1rem 0;
+}
+
+.date {
+    font-size: 0.9rem;
+    color: white;
+    opacity: 0.65;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

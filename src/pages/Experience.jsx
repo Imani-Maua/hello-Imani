@@ -1,18 +1,17 @@
-import ExperienceSection from '../components/ExperienceSection';
-import { workExperiences } from '../data/experiences';
-import styles from './Page.module.scss';
+import ExperienceLanding from '../components/ExperienceLanding';
+import AboutSection from '../components/AboutSection';
+import EducationSection from '../components/EducationSection';
+import WorkSection from '../components/WorkSection';
+import ProjectsSection from '../components/ProjectsSection';
 
 function Experience() {
   return (
-    <div className={styles.pageContainer}>
-      <header className={`${styles.pageHeader} ${styles.centeredHeader}`}>
-        <h1>Work Experience</h1>
-      </header>
-
-      <ExperienceSection
-        experiences={workExperiences}
-        hideTitle={true}
-      />
+    <div>
+      <ExperienceLanding />
+      <AboutSection />
+      <EducationSection />
+      <WorkSection />
+      <ProjectsSection />
     </div>
   );
 }

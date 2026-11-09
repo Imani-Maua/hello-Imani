@@ -1,0 +1,260 @@
+@use '../styles/variables.scss' as *;
+
+.landing {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.motif {
+    position: absolute;
+    color: #023e5e;
+    opacity: 0.45;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+    animation-name: float;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    user-select: none;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.content {
+    text-align: center;
+    z-index: 1;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.greeting {
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    font-weight: 400;
+    color: white;
+    opacity: 0.75;
+    margin: 0;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.name {
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+}
+
+.enjoy {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-weight: 500;
+    color: white;
+    margin: 0.25rem 0 0 0;
+}
+
+.typewriterLine {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    min-height: 1.4em;
+}
+
+.word {
+    color: white;
+    font-weight: 600;
+    display: inline-block;
+    text-decoration: underline;
+    text-decoration-color: $brand-pink;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+}
+
+.cursor {
+    display: inline-block;
+    color: $brand-pink;
+    font-weight: 300;
+    animation: blink 0.75s step-end infinite;
+    margin-left: 2px;
+}
+
+.availableCard {
+    position: absolute;
+    bottom: 5rem;
+    right: 2.5rem;
+    left: auto;
+    transform: none;
+    background: rgba(212, 165, 165, 0.1);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(212, 165, 165, 0.22);
+    border-radius: 20px;
+    padding: 1.25rem 1.5rem;
+    max-width: 300px;
+    width: calc(100% - 4rem);
+    text-align: left;
+    z-index: 1;
+
+    @media (max-width: 1024px) {
+        left: auto;
+        right: 1.25rem;
+        bottom: 1.5rem;
+        transform: none;
+        width: auto;
+        max-width: none;
+        padding: 0.6rem 1rem;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.availableHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+
+    @media (max-width: 1024px) { margin-bottom: 0; }
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: $brand-pink;
+    display: inline-block;
+    flex-shrink: 0;
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+.availableLabel {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+}
+
+.availableText {
+    font-size: 0.95rem;
+    color: white;
+    opacity: 0.85;
+    line-height: 1.6;
+    margin: 0 0 1rem 0;
+
+    @media (max-width: 1024px) { display: none; }
+}
+
+.cardDivider {
+    height: 1px;
+    background: rgba(212, 165, 165, 0.25);
+    margin-bottom: 1rem;
+
+    @media (max-width: 1024px) { display: none; }
+}
+
+.hireButton {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: opacity 0.2s ease;
+
+    &:hover { opacity: 0.75; }
+
+    @media (max-width: 1024px) { display: none; }
+}
+
+.hireArrow {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(212, 165, 165, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+
+    .hireButton:hover & {
+        background: $brand-pink;
+        color: white;
+        border-color: $brand-pink;
+    }
+}
+
+.line {
+    position: absolute;
+    left: 0;
+    height: 1px;
+    background: $brand-pink;
+    opacity: 0.25;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+    border-radius: 1px;
+}
+
+.lineLTR  { animation-name: slideLTR; }
+.lineRTL  { animation-name: slideRTL; }
+.lineDiag { animation-name: slideDiag; }
+.lineTTB  { animation-name: slideTTB; }
+.lineBTT  { animation-name: slideBTT; }
+
+@keyframes slideLTR {
+    from { transform: translateX(-300px); }
+    to   { transform: translateX(calc(100vw + 300px)); }
+}
+
+@keyframes slideRTL {
+    from { transform: translateX(calc(100vw + 300px)); }
+    to   { transform: translateX(-300px); }
+}
+
+@keyframes slideDiag {
+    from { transform: translate(-300px, 0px); }
+    to   { transform: translate(calc(100vw + 300px), 45px); }
+}
+
+@keyframes slideTTB {
+    from { transform: translateY(-220px); }
+    to   { transform: translateY(calc(100vh + 220px)); }
+}
+
+@keyframes slideBTT {
+    from { transform: translateY(calc(100vh + 220px)); }
+    to   { transform: translateY(-220px); }
+}
+
+@keyframes float {
+    0%   { transform: translateY(0px) rotate(0deg); }
+    30%  { transform: translateY(-14px) rotate(1deg); }
+    70%  { transform: translateY(10px) rotate(-1deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+@keyframes dotPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%       { transform: scale(1.4); opacity: 0.6; }
+}
+
+@keyframes fadeUpDown {
+    0%, 100% { transform: translateY(0); opacity: 0.35; }
+    50%       { transform: translateY(-6px); opacity: 0.6; }
+}
