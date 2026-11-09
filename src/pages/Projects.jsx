@@ -13,7 +13,7 @@ function Projects() {
       <section className={styles.engagementSection}>
         <h2>Have a project in mind?</h2>
         <p>I'm always open to discussing new opportunities, collaborations, or just geeky tech stuff! Let's build something amazing together. ✨</p>
-        <a href="mailto:elainemaua644@gmail.com" className={styles.contactLink}>Let's Chat! 🌸</a>
+        <a href="mailto:mauaelaineimani@gmail.com" className={styles.contactLink}>Let's Chat! 🌸</a>
       </section>
     </div>
   );
