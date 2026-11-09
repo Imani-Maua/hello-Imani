@@ -19,6 +19,8 @@ function Admin() {
     const navigate = useNavigate();
     const { state: draft, seed, add, updateItem, removeItem, stageObj, push, hasDraft } = useDraft();
     const [pushing, setPushing] = useState(false);
+    const [activePage, setActivePage] = useState('dashboard');
+    const [editingProfile, setEditingProfile] = useState(false);
     const [activeForm, setActiveForm] = useState(null);
 
     const [profileForm, setProfileForm] = useState({ firstname: '', lastname: '', email: '', phone: '', location: '', headline: '', summary: '' });
@@ -64,6 +66,7 @@ function Admin() {
         e.preventDefault();
         const body = { ...profileForm, phone: n(profileForm.phone), location: n(profileForm.location), headline: n(profileForm.headline), summary: n(profileForm.summary) };
         stageObj('profile', body, `/candidates/${candidateId}`);
+        setEditingProfile(false);
     }
 
     // --- Work Experiences ---
@@ -175,6 +178,7 @@ function Admin() {
         }
     }
 
+    const p = profileForm;
     const expList = draft.entities.experiences;
     const projList = draft.entities.projects;
     const skillList = draft.entities.skills;
@@ -189,238 +193,287 @@ function Admin() {
 
             <div className={styles.layout}>
 
-                {/* SIDEBAR */}
+                {/* SIDEBAR — navigation only */}
                 <aside className={styles.sidebar}>
-                    <h2 className={styles.sectionTitle}>Profile</h2>
-                    <form className={styles.form} onSubmit={saveProfile}>
-                        <div className={styles.field}><label>First name</label><input value={profileForm.firstname} onChange={e => setProfileForm(f => ({ ...f, firstname: e.target.value }))} /></div>
-                        <div className={styles.field}><label>Last name</label><input value={profileForm.lastname} onChange={e => setProfileForm(f => ({ ...f, lastname: e.target.value }))} /></div>
-                        <div className={styles.field}><label>Email</label><input type="email" value={profileForm.email} onChange={e => setProfileForm(f => ({ ...f, email: e.target.value }))} /></div>
-                        <div className={styles.field}><label>Phone</label><input value={profileForm.phone} onChange={e => setProfileForm(f => ({ ...f, phone: e.target.value }))} /></div>
-                        <div className={styles.field}><label>Location</label><input value={profileForm.location} onChange={e => setProfileForm(f => ({ ...f, location: e.target.value }))} /></div>
-                        <div className={styles.field}><label>Headline</label><input value={profileForm.headline} onChange={e => setProfileForm(f => ({ ...f, headline: e.target.value }))} /></div>
-                        <div className={styles.field}><label>Summary</label><textarea value={profileForm.summary} onChange={e => setProfileForm(f => ({ ...f, summary: e.target.value }))} /></div>
-                        <div className={styles.formActions}><button type="submit" className={styles.btnPrimary}>Stage profile</button></div>
-                    </form>
+                    <button
+                        className={`${styles.navItem} ${activePage === 'profile' ? styles.navItemActive : ''}`}
+                        onClick={() => setActivePage('profile')}
+                    >
+                        Profile
+                    </button>
                 </aside>
 
                 {/* MAIN CONTENT */}
                 <div className={styles.mainContent}>
 
-                {/* EXPERIENCES */}
-                <div className={styles.adminSection}>
-                    <div className={styles.sectionHeader}>
-                        <h2 className={styles.sectionTitle}>Experiences</h2>
-                        {activeForm !== 'exp' && !editingExp && (
-                            <button className={styles.btnAdd} onClick={() => setActiveForm('exp')}>+ Add Experience</button>
-                        )}
-                    </div>
-                    {(activeForm === 'exp' || editingExp) && (
-                        <form className={styles.form} onSubmit={saveExperience}>
-                            <p className={styles.formTitle}>{editingExp ? 'Edit experience' : 'New experience'}</p>
-                            <div className={styles.row}>
-                                <div className={styles.field}><label>Company *</label><input required value={expForm.company} onChange={e => setExpForm(f => ({ ...f, company: e.target.value }))} /></div>
-                                <div className={styles.field}><label>Title *</label><input required value={expForm.title} onChange={e => setExpForm(f => ({ ...f, title: e.target.value }))} /></div>
+                    {/* PROFILE PAGE */}
+                    {activePage === 'profile' && (
+                        <div className={styles.adminSection}>
+                            <div className={styles.sectionHeader}>
+                                <h2 className={styles.sectionTitle}>Profile</h2>
+                                {!editingProfile && (
+                                    <button className={styles.btnAdd} onClick={() => setEditingProfile(true)}>Edit Profile</button>
+                                )}
                             </div>
-                            <div className={styles.row}>
-                                <div className={styles.field}>
-                                    <label>Work arrangement</label>
-                                    <select value={expForm.work_type} onChange={e => setExpForm(f => ({ ...f, work_type: e.target.value }))}>
-                                        <option value=''>— select —</option>
-                                        <option value='hybrid'>Hybrid</option>
-                                        <option value='in_person'>In Person</option>
-                                        <option value='remote'>Remote</option>
-                                    </select>
-                                </div>
-                                <div className={styles.field}>
-                                    <label>Employment type</label>
-                                    <select value={expForm.employment_type} onChange={e => setExpForm(f => ({ ...f, employment_type: e.target.value }))}>
-                                        <option value=''>— select —</option>
-                                        <option value='full_time'>Full Time</option>
-                                        <option value='part_time'>Part Time</option>
-                                        <option value='internship'>Internship</option>
-                                        <option value='fellowship'>Fellowship</option>
-                                        <option value='research'>Research</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className={styles.row}>
-                                <div className={styles.field}><label>Location</label><input value={expForm.location} onChange={e => setExpForm(f => ({ ...f, location: e.target.value }))} /></div>
-                                <div className={styles.field}><label>Start date</label><input type="date" value={expForm.start_date} onChange={e => setExpForm(f => ({ ...f, start_date: e.target.value }))} /></div>
-                            </div>
-                            <div className={styles.row}>
-                                <div className={styles.field}><label>End date</label><input type="date" value={expForm.end_date} onChange={e => setExpForm(f => ({ ...f, end_date: e.target.value }))} disabled={expForm.is_current} /></div>
-                                <div className={styles.field} style={{ justifyContent: 'flex-end' }}>
-                                    <label className={styles.checkField}><input type="checkbox" checked={expForm.is_current} onChange={e => setExpForm(f => ({ ...f, is_current: e.target.checked, end_date: '' }))} /> Current role</label>
-                                </div>
-                            </div>
-                            <div className={styles.field}><label>Description</label><textarea value={expForm.description} onChange={e => setExpForm(f => ({ ...f, description: e.target.value }))} /></div>
-                            <div className={styles.field}><label>Achievements</label><textarea value={expForm.achievements} onChange={e => setExpForm(f => ({ ...f, achievements: e.target.value }))} /><span className={styles.hint}>Comma-separated</span></div>
-                            <div className={styles.field}><label>Technologies</label><input value={expForm.technologies} onChange={e => setExpForm(f => ({ ...f, technologies: e.target.value }))} /><span className={styles.hint}>Comma-separated</span></div>
-                            <div className={styles.formActions}>
-                                <button type="submit" className={styles.btnPrimary}>{editingExp ? 'Save changes' : 'Add experience'}</button>
-                                <button type="button" className={styles.btnSecondary} onClick={cancelExp}>Cancel</button>
-                            </div>
-                        </form>
-                    )}
-                    <div className={styles.list}>
-                        {expList === undefined && <p className={styles.empty}>Loading…</p>}
-                        {expList !== undefined && expList.length === 0 && <p className={styles.empty}>No experiences yet.</p>}
-                        {(expList || []).map(exp => (
-                            <div key={exp.id} className={styles.listItem}>
-                                <div className={styles.listItemInfo}>
-                                    <strong>{exp.title} @ {exp.company}{exp._new ? ' · unsaved' : ''}</strong>
-                                    <span>{exp.location} · {exp.start_date} – {exp.is_current ? 'Present' : exp.end_date}</span>
-                                </div>
-                                <div className={styles.listItemActions}>
-                                    <button className={styles.btnEdit} onClick={() => startEditExp(exp)}>Edit</button>
-                                    <button className={styles.btnDelete} onClick={() => deleteExperience(exp.id)}>Delete</button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
 
-                {/* PROJECTS */}
-                <div className={styles.adminSection}>
-                    <div className={styles.sectionHeader}>
-                        <h2 className={styles.sectionTitle}>Projects</h2>
-                        {activeForm !== 'proj' && !editingProj && (
-                            <button className={styles.btnAdd} onClick={() => setActiveForm('proj')}>+ Add Project</button>
-                        )}
-                    </div>
-                    {(activeForm === 'proj' || editingProj) && (
-                        <form className={styles.form} onSubmit={saveProject}>
-                            <p className={styles.formTitle}>{editingProj ? 'Edit project' : 'New project'}</p>
-                            <div className={styles.field}><label>Name *</label><input required value={projForm.name} onChange={e => setProjForm(f => ({ ...f, name: e.target.value }))} /></div>
-                            <div className={styles.field}><label>Description</label><textarea value={projForm.description} onChange={e => setProjForm(f => ({ ...f, description: e.target.value }))} /></div>
-                            <div className={styles.row}>
-                                <div className={styles.field}><label>Live URL</label><input type="url" value={projForm.url} onChange={e => setProjForm(f => ({ ...f, url: e.target.value }))} /></div>
-                                <div className={styles.field}><label>Repo URL</label><input type="url" value={projForm.repo_url} onChange={e => setProjForm(f => ({ ...f, repo_url: e.target.value }))} /></div>
-                            </div>
-                            <div className={styles.row}>
-                                <div className={styles.field}><label>Start date</label><input type="date" value={projForm.start_date} onChange={e => setProjForm(f => ({ ...f, start_date: e.target.value }))} /></div>
-                                <div className={styles.field}><label>End date</label><input type="date" value={projForm.end_date} onChange={e => setProjForm(f => ({ ...f, end_date: e.target.value }))} /></div>
-                            </div>
-                            <div className={styles.field}><label>Technologies</label><input value={projForm.technologies} onChange={e => setProjForm(f => ({ ...f, technologies: e.target.value }))} /><span className={styles.hint}>Comma-separated</span></div>
-                            <div className={styles.field}><label>Highlights</label><textarea value={projForm.highlights} onChange={e => setProjForm(f => ({ ...f, highlights: e.target.value }))} /><span className={styles.hint}>Comma-separated</span></div>
-                            <div className={styles.formActions}>
-                                <button type="submit" className={styles.btnPrimary}>{editingProj ? 'Save changes' : 'Add project'}</button>
-                                <button type="button" className={styles.btnSecondary} onClick={cancelProj}>Cancel</button>
-                            </div>
-                        </form>
+                            {editingProfile ? (
+                                <form className={styles.form} onSubmit={saveProfile}>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}><label>First name</label><input value={p.firstname} onChange={e => setProfileForm(f => ({ ...f, firstname: e.target.value }))} /></div>
+                                        <div className={styles.field}><label>Last name</label><input value={p.lastname} onChange={e => setProfileForm(f => ({ ...f, lastname: e.target.value }))} /></div>
+                                    </div>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}><label>Email</label><input type="email" value={p.email} onChange={e => setProfileForm(f => ({ ...f, email: e.target.value }))} /></div>
+                                        <div className={styles.field}><label>Phone</label><input value={p.phone} onChange={e => setProfileForm(f => ({ ...f, phone: e.target.value }))} /></div>
+                                    </div>
+                                    <div className={styles.field}><label>Location</label><input value={p.location} onChange={e => setProfileForm(f => ({ ...f, location: e.target.value }))} /></div>
+                                    <div className={styles.field}><label>Headline</label><input value={p.headline} onChange={e => setProfileForm(f => ({ ...f, headline: e.target.value }))} /></div>
+                                    <div className={styles.field}><label>Summary</label><textarea value={p.summary} onChange={e => setProfileForm(f => ({ ...f, summary: e.target.value }))} /></div>
+                                    <div className={styles.formActions}>
+                                        <button type="submit" className={styles.btnPrimary}>Stage profile</button>
+                                        <button type="button" className={styles.btnSecondary} onClick={() => setEditingProfile(false)}>Cancel</button>
+                                    </div>
+                                </form>
+                            ) : (
+                                <div className={styles.profileView}>
+                                    {[
+                                        ['First name', p.firstname],
+                                        ['Last name', p.lastname],
+                                        ['Email', p.email],
+                                        ['Phone', p.phone],
+                                        ['Location', p.location],
+                                        ['Headline', p.headline],
+                                        ['Summary', p.summary],
+                                    ].map(([label, val]) => (
+                                        <div key={label} className={styles.profileRow}>
+                                            <span className={styles.profileLabel}>{label}</span>
+                                            <span className={styles.profileValue}>{val || '—'}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     )}
-                    <div className={styles.list}>
-                        {projList === undefined && <p className={styles.empty}>Loading…</p>}
-                        {projList !== undefined && projList.length === 0 && <p className={styles.empty}>No projects yet.</p>}
-                        {(projList || []).map(proj => (
-                            <div key={proj.id} className={styles.listItem}>
-                                <div className={styles.listItemInfo}>
-                                    <strong>{proj.name}{proj._new ? ' · unsaved' : ''}</strong>
-                                    <span>{proj.description}</span>
-                                </div>
-                                <div className={styles.listItemActions}>
-                                    <button className={styles.btnEdit} onClick={() => startEditProj(proj)}>Edit</button>
-                                    <button className={styles.btnDelete} onClick={() => deleteProject(proj.id)}>Delete</button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
 
-                {/* SKILLS */}
-                <div className={styles.adminSection}>
-                    <div className={styles.sectionHeader}>
-                        <h2 className={styles.sectionTitle}>Skills</h2>
-                        {activeForm !== 'skill' && (
-                            <button className={styles.btnAdd} onClick={() => setActiveForm('skill')}>+ Add Skill</button>
-                        )}
-                    </div>
-                    {activeForm === 'skill' && (
-                        <form className={styles.form} onSubmit={saveSkill}>
-                            <p className={styles.formTitle}>New skill</p>
-                            <div className={styles.row}>
-                                <div className={styles.field}><label>Name *</label><input required value={skillForm.name} onChange={e => setSkillForm(f => ({ ...f, name: e.target.value }))} /></div>
-                                <div className={styles.field}><label>Category</label>
-                                    <select value={skillForm.category} onChange={e => setSkillForm(f => ({ ...f, category: e.target.value }))}>
-                                        {['language', 'framework', 'tool', 'platform', 'soft', 'domain', 'other'].map(c => <option key={c} value={c}>{c}</option>)}
-                                    </select>
-                                </div>
+                    {/* DASHBOARD — experiences, projects, skills, links */}
+                    {activePage === 'dashboard' && (
+                        <>
+                        {/* EXPERIENCES */}
+                        <div className={styles.adminSection}>
+                            <div className={styles.sectionHeader}>
+                                <h2 className={styles.sectionTitle}>Experiences</h2>
+                                {activeForm !== 'exp' && !editingExp && (
+                                    <button className={styles.btnAdd} onClick={() => setActiveForm('exp')}>+ Add Experience</button>
+                                )}
                             </div>
-                            <div className={styles.row}>
-                                <div className={styles.field}><label>Proficiency</label>
-                                    <select value={skillForm.proficiency} onChange={e => setSkillForm(f => ({ ...f, proficiency: e.target.value }))}>
-                                        <option value="">— select —</option>
-                                        {['beginner', 'intermediate', 'advanced', 'expert'].map(p => <option key={p} value={p}>{p}</option>)}
-                                    </select>
-                                </div>
-                                <div className={styles.field}><label>Years experience</label><input type="number" min="0" value={skillForm.years_experience} onChange={e => setSkillForm(f => ({ ...f, years_experience: e.target.value }))} /></div>
+                            {(activeForm === 'exp' || editingExp) && (
+                                <form className={styles.form} onSubmit={saveExperience}>
+                                    <p className={styles.formTitle}>{editingExp ? 'Edit experience' : 'New experience'}</p>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}><label>Company *</label><input required value={expForm.company} onChange={e => setExpForm(f => ({ ...f, company: e.target.value }))} /></div>
+                                        <div className={styles.field}><label>Title *</label><input required value={expForm.title} onChange={e => setExpForm(f => ({ ...f, title: e.target.value }))} /></div>
+                                    </div>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}>
+                                            <label>Work arrangement</label>
+                                            <select value={expForm.work_type} onChange={e => setExpForm(f => ({ ...f, work_type: e.target.value }))}>
+                                                <option value=''>— select —</option>
+                                                <option value='hybrid'>Hybrid</option>
+                                                <option value='in_person'>In Person</option>
+                                                <option value='remote'>Remote</option>
+                                            </select>
+                                        </div>
+                                        <div className={styles.field}>
+                                            <label>Employment type</label>
+                                            <select value={expForm.employment_type} onChange={e => setExpForm(f => ({ ...f, employment_type: e.target.value }))}>
+                                                <option value=''>— select —</option>
+                                                <option value='full_time'>Full Time</option>
+                                                <option value='part_time'>Part Time</option>
+                                                <option value='internship'>Internship</option>
+                                                <option value='fellowship'>Fellowship</option>
+                                                <option value='research'>Research</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}><label>Location</label><input value={expForm.location} onChange={e => setExpForm(f => ({ ...f, location: e.target.value }))} /></div>
+                                        <div className={styles.field}><label>Start date</label><input type="date" value={expForm.start_date} onChange={e => setExpForm(f => ({ ...f, start_date: e.target.value }))} /></div>
+                                    </div>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}><label>End date</label><input type="date" value={expForm.end_date} onChange={e => setExpForm(f => ({ ...f, end_date: e.target.value }))} disabled={expForm.is_current} /></div>
+                                        <div className={styles.field} style={{ justifyContent: 'flex-end' }}>
+                                            <label className={styles.checkField}><input type="checkbox" checked={expForm.is_current} onChange={e => setExpForm(f => ({ ...f, is_current: e.target.checked, end_date: '' }))} /> Current role</label>
+                                        </div>
+                                    </div>
+                                    <div className={styles.field}><label>Description</label><textarea value={expForm.description} onChange={e => setExpForm(f => ({ ...f, description: e.target.value }))} /></div>
+                                    <div className={styles.field}><label>Achievements</label><textarea value={expForm.achievements} onChange={e => setExpForm(f => ({ ...f, achievements: e.target.value }))} /><span className={styles.hint}>Comma-separated</span></div>
+                                    <div className={styles.field}><label>Technologies</label><input value={expForm.technologies} onChange={e => setExpForm(f => ({ ...f, technologies: e.target.value }))} /><span className={styles.hint}>Comma-separated</span></div>
+                                    <div className={styles.formActions}>
+                                        <button type="submit" className={styles.btnPrimary}>{editingExp ? 'Save changes' : 'Add experience'}</button>
+                                        <button type="button" className={styles.btnSecondary} onClick={cancelExp}>Cancel</button>
+                                    </div>
+                                </form>
+                            )}
+                            <div className={styles.list}>
+                                {expList === undefined && <p className={styles.empty}>Loading…</p>}
+                                {expList !== undefined && expList.length === 0 && <p className={styles.empty}>No experiences yet.</p>}
+                                {(expList || []).map(exp => (
+                                    <div key={exp.id} className={styles.listItem}>
+                                        <div className={styles.listItemInfo}>
+                                            <strong>{exp.title} @ {exp.company}{exp._new ? ' · unsaved' : ''}</strong>
+                                            <span>{exp.location} · {exp.start_date} – {exp.is_current ? 'Present' : exp.end_date}</span>
+                                        </div>
+                                        <div className={styles.listItemActions}>
+                                            <button className={styles.btnEdit} onClick={() => startEditExp(exp)}>Edit</button>
+                                            <button className={styles.btnDelete} onClick={() => deleteExperience(exp.id)}>Delete</button>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                            <div className={styles.formActions}>
-                                <button type="submit" className={styles.btnPrimary}>Add skill</button>
-                                <button type="button" className={styles.btnSecondary} onClick={() => { setSkillForm(BLANK_SKILL); setActiveForm(null); }}>Cancel</button>
-                            </div>
-                        </form>
-                    )}
-                    <div className={styles.list}>
-                        {skillList === undefined && <p className={styles.empty}>Loading…</p>}
-                        {skillList !== undefined && skillList.length === 0 && <p className={styles.empty}>No skills yet.</p>}
-                        {(skillList || []).map(skill => (
-                            <div key={skill.id} className={styles.listItem}>
-                                <div className={styles.listItemInfo}>
-                                    <strong>{skill.name}{skill._new ? ' · unsaved' : ''}</strong>
-                                    <span>{skill.category}{skill.proficiency ? ` · ${skill.proficiency}` : ''}{skill.years_experience ? ` · ${skill.years_experience}y` : ''}</span>
-                                </div>
-                                <div className={styles.listItemActions}>
-                                    <button className={styles.btnDelete} onClick={() => deleteSkill(skill.id)}>Delete</button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                        </div>
 
-                {/* LINKS */}
-                <div className={styles.adminSection}>
-                    <div className={styles.sectionHeader}>
-                        <h2 className={styles.sectionTitle}>Links</h2>
-                        {activeForm !== 'link' && (
-                            <button className={styles.btnAdd} onClick={() => setActiveForm('link')}>+ Add Link</button>
-                        )}
-                    </div>
-                    {activeForm === 'link' && (
-                        <form className={styles.form} onSubmit={saveLink}>
-                            <p className={styles.formTitle}>New link</p>
-                            <div className={styles.row}>
-                                <div className={styles.field}><label>Type</label>
-                                    <select value={linkForm.link_type} onChange={e => setLinkForm(f => ({ ...f, link_type: e.target.value }))}>
-                                        {['portfolio', 'github', 'linkedin', 'blog', 'publication', 'other'].map(t => <option key={t} value={t}>{t}</option>)}
-                                    </select>
-                                </div>
-                                <div className={styles.field}><label>Label</label><input value={linkForm.label} onChange={e => setLinkForm(f => ({ ...f, label: e.target.value }))} placeholder="e.g. GitHub" /></div>
+                        {/* PROJECTS */}
+                        <div className={styles.adminSection}>
+                            <div className={styles.sectionHeader}>
+                                <h2 className={styles.sectionTitle}>Projects</h2>
+                                {activeForm !== 'proj' && !editingProj && (
+                                    <button className={styles.btnAdd} onClick={() => setActiveForm('proj')}>+ Add Project</button>
+                                )}
                             </div>
-                            <div className={styles.field}><label>URL *</label><input required type="url" value={linkForm.url} onChange={e => setLinkForm(f => ({ ...f, url: e.target.value }))} /></div>
-                            <div className={styles.formActions}>
-                                <button type="submit" className={styles.btnPrimary}>Add link</button>
-                                <button type="button" className={styles.btnSecondary} onClick={() => { setLinkForm(BLANK_LINK); setActiveForm(null); }}>Cancel</button>
+                            {(activeForm === 'proj' || editingProj) && (
+                                <form className={styles.form} onSubmit={saveProject}>
+                                    <p className={styles.formTitle}>{editingProj ? 'Edit project' : 'New project'}</p>
+                                    <div className={styles.field}><label>Name *</label><input required value={projForm.name} onChange={e => setProjForm(f => ({ ...f, name: e.target.value }))} /></div>
+                                    <div className={styles.field}><label>Description</label><textarea value={projForm.description} onChange={e => setProjForm(f => ({ ...f, description: e.target.value }))} /></div>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}><label>Live URL</label><input type="url" value={projForm.url} onChange={e => setProjForm(f => ({ ...f, url: e.target.value }))} /></div>
+                                        <div className={styles.field}><label>Repo URL</label><input type="url" value={projForm.repo_url} onChange={e => setProjForm(f => ({ ...f, repo_url: e.target.value }))} /></div>
+                                    </div>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}><label>Start date</label><input type="date" value={projForm.start_date} onChange={e => setProjForm(f => ({ ...f, start_date: e.target.value }))} /></div>
+                                        <div className={styles.field}><label>End date</label><input type="date" value={projForm.end_date} onChange={e => setProjForm(f => ({ ...f, end_date: e.target.value }))} /></div>
+                                    </div>
+                                    <div className={styles.field}><label>Technologies</label><input value={projForm.technologies} onChange={e => setProjForm(f => ({ ...f, technologies: e.target.value }))} /><span className={styles.hint}>Comma-separated</span></div>
+                                    <div className={styles.field}><label>Highlights</label><textarea value={projForm.highlights} onChange={e => setProjForm(f => ({ ...f, highlights: e.target.value }))} /><span className={styles.hint}>Comma-separated</span></div>
+                                    <div className={styles.formActions}>
+                                        <button type="submit" className={styles.btnPrimary}>{editingProj ? 'Save changes' : 'Add project'}</button>
+                                        <button type="button" className={styles.btnSecondary} onClick={cancelProj}>Cancel</button>
+                                    </div>
+                                </form>
+                            )}
+                            <div className={styles.list}>
+                                {projList === undefined && <p className={styles.empty}>Loading…</p>}
+                                {projList !== undefined && projList.length === 0 && <p className={styles.empty}>No projects yet.</p>}
+                                {(projList || []).map(proj => (
+                                    <div key={proj.id} className={styles.listItem}>
+                                        <div className={styles.listItemInfo}>
+                                            <strong>{proj.name}{proj._new ? ' · unsaved' : ''}</strong>
+                                            <span>{proj.description}</span>
+                                        </div>
+                                        <div className={styles.listItemActions}>
+                                            <button className={styles.btnEdit} onClick={() => startEditProj(proj)}>Edit</button>
+                                            <button className={styles.btnDelete} onClick={() => deleteProject(proj.id)}>Delete</button>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        </form>
+                        </div>
+
+                        {/* SKILLS */}
+                        <div className={styles.adminSection}>
+                            <div className={styles.sectionHeader}>
+                                <h2 className={styles.sectionTitle}>Skills</h2>
+                                {activeForm !== 'skill' && (
+                                    <button className={styles.btnAdd} onClick={() => setActiveForm('skill')}>+ Add Skill</button>
+                                )}
+                            </div>
+                            {activeForm === 'skill' && (
+                                <form className={styles.form} onSubmit={saveSkill}>
+                                    <p className={styles.formTitle}>New skill</p>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}><label>Name *</label><input required value={skillForm.name} onChange={e => setSkillForm(f => ({ ...f, name: e.target.value }))} /></div>
+                                        <div className={styles.field}><label>Category</label>
+                                            <select value={skillForm.category} onChange={e => setSkillForm(f => ({ ...f, category: e.target.value }))}>
+                                                {['language', 'framework', 'tool', 'platform', 'soft', 'domain', 'other'].map(c => <option key={c} value={c}>{c}</option>)}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}><label>Proficiency</label>
+                                            <select value={skillForm.proficiency} onChange={e => setSkillForm(f => ({ ...f, proficiency: e.target.value }))}>
+                                                <option value="">— select —</option>
+                                                {['beginner', 'intermediate', 'advanced', 'expert'].map(p => <option key={p} value={p}>{p}</option>)}
+                                            </select>
+                                        </div>
+                                        <div className={styles.field}><label>Years experience</label><input type="number" min="0" value={skillForm.years_experience} onChange={e => setSkillForm(f => ({ ...f, years_experience: e.target.value }))} /></div>
+                                    </div>
+                                    <div className={styles.formActions}>
+                                        <button type="submit" className={styles.btnPrimary}>Add skill</button>
+                                        <button type="button" className={styles.btnSecondary} onClick={() => { setSkillForm(BLANK_SKILL); setActiveForm(null); }}>Cancel</button>
+                                    </div>
+                                </form>
+                            )}
+                            <div className={styles.list}>
+                                {skillList === undefined && <p className={styles.empty}>Loading…</p>}
+                                {skillList !== undefined && skillList.length === 0 && <p className={styles.empty}>No skills yet.</p>}
+                                {(skillList || []).map(skill => (
+                                    <div key={skill.id} className={styles.listItem}>
+                                        <div className={styles.listItemInfo}>
+                                            <strong>{skill.name}{skill._new ? ' · unsaved' : ''}</strong>
+                                            <span>{skill.category}{skill.proficiency ? ` · ${skill.proficiency}` : ''}{skill.years_experience ? ` · ${skill.years_experience}y` : ''}</span>
+                                        </div>
+                                        <div className={styles.listItemActions}>
+                                            <button className={styles.btnDelete} onClick={() => deleteSkill(skill.id)}>Delete</button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* LINKS */}
+                        <div className={styles.adminSection}>
+                            <div className={styles.sectionHeader}>
+                                <h2 className={styles.sectionTitle}>Links</h2>
+                                {activeForm !== 'link' && (
+                                    <button className={styles.btnAdd} onClick={() => setActiveForm('link')}>+ Add Link</button>
+                                )}
+                            </div>
+                            {activeForm === 'link' && (
+                                <form className={styles.form} onSubmit={saveLink}>
+                                    <p className={styles.formTitle}>New link</p>
+                                    <div className={styles.row}>
+                                        <div className={styles.field}><label>Type</label>
+                                            <select value={linkForm.link_type} onChange={e => setLinkForm(f => ({ ...f, link_type: e.target.value }))}>
+                                                {['portfolio', 'github', 'linkedin', 'blog', 'publication', 'other'].map(t => <option key={t} value={t}>{t}</option>)}
+                                            </select>
+                                        </div>
+                                        <div className={styles.field}><label>Label</label><input value={linkForm.label} onChange={e => setLinkForm(f => ({ ...f, label: e.target.value }))} placeholder="e.g. GitHub" /></div>
+                                    </div>
+                                    <div className={styles.field}><label>URL *</label><input required type="url" value={linkForm.url} onChange={e => setLinkForm(f => ({ ...f, url: e.target.value }))} /></div>
+                                    <div className={styles.formActions}>
+                                        <button type="submit" className={styles.btnPrimary}>Add link</button>
+                                        <button type="button" className={styles.btnSecondary} onClick={() => { setLinkForm(BLANK_LINK); setActiveForm(null); }}>Cancel</button>
+                                    </div>
+                                </form>
+                            )}
+                            <div className={styles.list}>
+                                {linkList === undefined && <p className={styles.empty}>Loading…</p>}
+                                {linkList !== undefined && linkList.length === 0 && <p className={styles.empty}>No links yet.</p>}
+                                {(linkList || []).map(link => (
+                                    <div key={link.id} className={styles.listItem}>
+                                        <div className={styles.listItemInfo}>
+                                            <strong>{link.label || link.link_type}{link._new ? ' · unsaved' : ''}</strong>
+                                            <span>{link.url}</span>
+                                        </div>
+                                        <div className={styles.listItemActions}>
+                                            <button className={styles.btnDelete} onClick={() => deleteLink(link.id)}>Delete</button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        </>
                     )}
-                    <div className={styles.list}>
-                        {linkList === undefined && <p className={styles.empty}>Loading…</p>}
-                        {linkList !== undefined && linkList.length === 0 && <p className={styles.empty}>No links yet.</p>}
-                        {(linkList || []).map(link => (
-                            <div key={link.id} className={styles.listItem}>
-                                <div className={styles.listItemInfo}>
-                                    <strong>{link.label || link.link_type}{link._new ? ' · unsaved' : ''}</strong>
-                                    <span>{link.url}</span>
-                                </div>
-                                <div className={styles.listItemActions}>
-                                    <button className={styles.btnDelete} onClick={() => deleteLink(link.id)}>Delete</button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
 
                 </div>{/* end mainContent */}
             </div>{/* end layout */}
