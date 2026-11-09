@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useDraft } from '../context/DraftContext';
 import { authedRequest } from '../services/api';
 import styles from './Admin.module.scss';
 
@@ -16,26 +17,24 @@ const BLANK_LINK = { link_type: 'github', label: '', url: '' };
 function Admin() {
     const { isAuthed, candidateId, logout } = useAuth();
     const navigate = useNavigate();
+    const { state: draft, seed, add, updateItem, removeItem, stageObj, push, hasDraft } = useDraft();
     const [tab, setTab] = useState('profile');
+    const [pushing, setPushing] = useState(false);
 
-    const [profile, setProfile] = useState(null);
     const [profileForm, setProfileForm] = useState({ firstname: '', lastname: '', email: '', phone: '', location: '', headline: '', summary: '' });
 
-    const [experiences, setExperiences] = useState([]);
     const [expForm, setExpForm] = useState(BLANK_EXP);
     const [editingExp, setEditingExp] = useState(null);
 
-    const [projects, setProjects] = useState([]);
     const [projForm, setProjForm] = useState(BLANK_PROJ);
     const [editingProj, setEditingProj] = useState(null);
 
-    const [skills, setSkills] = useState([]);
     const [skillForm, setSkillForm] = useState(BLANK_SKILL);
-
-    const [links, setLinks] = useState([]);
     const [linkForm, setLinkForm] = useState(BLANK_LINK);
 
-    if (!isAuthed) { navigate('/'); return null; }
+    useEffect(() => {
+        if (!isAuthed) { navigate('/'); }
+    }, [isAuthed]);
 
     useEffect(() => {
         if (!candidateId) return;
@@ -46,105 +45,139 @@ function Admin() {
         if (tab === 'links') loadLinks();
     }, [tab, candidateId]);
 
+    if (!isAuthed) return null;
+
     // --- Profile ---
     async function loadProfile() {
+        if (draft.entities.profile !== undefined) {
+            const p = draft.entities.profile;
+            setProfileForm({ firstname: p.firstname || '', lastname: p.lastname || '', email: p.email || '', phone: p.phone || '', location: p.location || '', headline: p.headline || '', summary: p.summary || '' });
+            return;
+        }
         try {
             const data = await authedRequest('GET', `/candidates/${candidateId}`);
-            setProfile(data);
+            seed('profile', data);
             setProfileForm({ firstname: data.firstname || '', lastname: data.lastname || '', email: data.email || '', phone: data.phone || '', location: data.location || '', headline: data.headline || '', summary: data.summary || '' });
         } catch (e) { console.error(e); }
     }
-    async function saveProfile(e) {
+    function saveProfile(e) {
         e.preventDefault();
-        try {
-            const body = { ...profileForm, phone: n(profileForm.phone), location: n(profileForm.location), headline: n(profileForm.headline), summary: n(profileForm.summary) };
-            await authedRequest('PATCH', `/candidates/${candidateId}`, body);
-            alert('Profile saved!');
-        } catch (e) { console.error(e); }
+        const body = { ...profileForm, phone: n(profileForm.phone), location: n(profileForm.location), headline: n(profileForm.headline), summary: n(profileForm.summary) };
+        stageObj('profile', body, `/candidates/${candidateId}`);
     }
 
     // --- Work Experiences ---
     async function loadExperiences() {
-        try { setExperiences(await authedRequest('GET', `/candidates/${candidateId}/work-experiences`)); }
-        catch (e) { console.error(e); }
+        if (draft.entities.experiences !== undefined) return;
+        try {
+            const data = await authedRequest('GET', `/candidates/${candidateId}/work-experiences`);
+            seed('experiences', data);
+        } catch (e) { console.error(e); }
     }
-    async function saveExperience(e) {
+    function saveExperience(e) {
         e.preventDefault();
         const body = { company: expForm.company, title: expForm.title, location: n(expForm.location), work_type: n(expForm.work_type), employment_type: n(expForm.employment_type), start_date: n(expForm.start_date), end_date: expForm.is_current ? null : n(expForm.end_date), is_current: expForm.is_current, description: n(expForm.description), achievements: toArr(expForm.achievements), technologies: toArr(expForm.technologies) };
-        try {
-            if (editingExp) await authedRequest('PATCH', `/candidates/${candidateId}/work-experiences/${editingExp}`, body);
-            else await authedRequest('POST', `/candidates/${candidateId}/work-experiences`, body);
-            setExpForm(BLANK_EXP); setEditingExp(null); loadExperiences();
-        } catch (e) { console.error(e); }
+        if (editingExp) {
+            updateItem('experiences', editingExp, body, `/candidates/${candidateId}/work-experiences/${editingExp}`);
+        } else {
+            add('experiences', body, `/candidates/${candidateId}/work-experiences`);
+        }
+        setExpForm(BLANK_EXP);
+        setEditingExp(null);
     }
     function startEditExp(exp) {
         setEditingExp(exp.id);
         setExpForm({ company: exp.company || '', title: exp.title || '', location: exp.location || '', work_type: exp.work_type || '', employment_type: exp.employment_type || '', start_date: exp.start_date || '', end_date: exp.end_date || '', is_current: exp.is_current || false, description: exp.description || '', achievements: fromArr(exp.achievements), technologies: fromArr(exp.technologies) });
     }
-    async function deleteExperience(id) {
+    function deleteExperience(id) {
         if (!confirm('Delete this experience?')) return;
-        try { await authedRequest('DELETE', `/candidates/${candidateId}/work-experiences/${id}`); loadExperiences(); }
-        catch (e) { console.error(e); }
+        removeItem('experiences', id, `/candidates/${candidateId}/work-experiences/${id}`);
     }
 
     // --- Projects ---
     async function loadProjects() {
-        try { setProjects(await authedRequest('GET', `/candidates/${candidateId}/projects`)); }
-        catch (e) { console.error(e); }
+        if (draft.entities.projects !== undefined) return;
+        try {
+            const data = await authedRequest('GET', `/candidates/${candidateId}/projects`);
+            seed('projects', data);
+        } catch (e) { console.error(e); }
     }
-    async function saveProject(e) {
+    function saveProject(e) {
         e.preventDefault();
         const body = { name: projForm.name, description: n(projForm.description), url: n(projForm.url), repo_url: n(projForm.repo_url), start_date: n(projForm.start_date), end_date: n(projForm.end_date), technologies: toArr(projForm.technologies), highlights: toArr(projForm.highlights) };
-        try {
-            if (editingProj) await authedRequest('PATCH', `/candidates/${candidateId}/projects/${editingProj}`, body);
-            else await authedRequest('POST', `/candidates/${candidateId}/projects`, body);
-            setProjForm(BLANK_PROJ); setEditingProj(null); loadProjects();
-        } catch (e) { console.error(e); }
+        if (editingProj) {
+            updateItem('projects', editingProj, body, `/candidates/${candidateId}/projects/${editingProj}`);
+        } else {
+            add('projects', body, `/candidates/${candidateId}/projects`);
+        }
+        setProjForm(BLANK_PROJ);
+        setEditingProj(null);
     }
     function startEditProj(proj) {
         setEditingProj(proj.id);
         setProjForm({ name: proj.name || '', description: proj.description || '', url: proj.url || '', repo_url: proj.repo_url || '', start_date: proj.start_date || '', end_date: proj.end_date || '', technologies: fromArr(proj.technologies), highlights: fromArr(proj.highlights) });
     }
-    async function deleteProject(id) {
+    function deleteProject(id) {
         if (!confirm('Delete this project?')) return;
-        try { await authedRequest('DELETE', `/candidates/${candidateId}/projects/${id}`); loadProjects(); }
-        catch (e) { console.error(e); }
+        removeItem('projects', id, `/candidates/${candidateId}/projects/${id}`);
     }
 
     // --- Skills ---
     async function loadSkills() {
-        try { setSkills(await authedRequest('GET', `/candidates/${candidateId}/skills`)); }
-        catch (e) { console.error(e); }
+        if (draft.entities.skills !== undefined) return;
+        try {
+            const data = await authedRequest('GET', `/candidates/${candidateId}/skills`);
+            seed('skills', data);
+        } catch (e) { console.error(e); }
     }
-    async function saveSkill(e) {
+    function saveSkill(e) {
         e.preventDefault();
         const body = { name: skillForm.name, category: skillForm.category, proficiency: n(skillForm.proficiency), years_experience: skillForm.years_experience ? parseInt(skillForm.years_experience) : null };
-        try { await authedRequest('POST', `/candidates/${candidateId}/skills`, body); setSkillForm(BLANK_SKILL); loadSkills(); }
-        catch (e) { console.error(e); }
+        add('skills', body, `/candidates/${candidateId}/skills`);
+        setSkillForm(BLANK_SKILL);
     }
-    async function deleteSkill(id) {
+    function deleteSkill(id) {
         if (!confirm('Delete this skill?')) return;
-        try { await authedRequest('DELETE', `/candidates/${candidateId}/skills/${id}`); loadSkills(); }
-        catch (e) { console.error(e); }
+        removeItem('skills', id, `/candidates/${candidateId}/skills/${id}`);
     }
 
     // --- Links ---
     async function loadLinks() {
-        try { setLinks(await authedRequest('GET', `/candidates/${candidateId}/links`)); }
-        catch (e) { console.error(e); }
+        if (draft.entities.links !== undefined) return;
+        try {
+            const data = await authedRequest('GET', `/candidates/${candidateId}/links`);
+            seed('links', data);
+        } catch (e) { console.error(e); }
     }
-    async function saveLink(e) {
+    function saveLink(e) {
         e.preventDefault();
-        try { await authedRequest('POST', `/candidates/${candidateId}/links`, linkForm); setLinkForm(BLANK_LINK); loadLinks(); }
-        catch (e) { console.error(e); }
+        add('links', linkForm, `/candidates/${candidateId}/links`);
+        setLinkForm(BLANK_LINK);
     }
-    async function deleteLink(id) {
+    function deleteLink(id) {
         if (!confirm('Delete this link?')) return;
-        try { await authedRequest('DELETE', `/candidates/${candidateId}/links/${id}`); loadLinks(); }
-        catch (e) { console.error(e); }
+        removeItem('links', id, `/candidates/${candidateId}/links/${id}`);
+    }
+
+    // --- Push ---
+    async function handlePush() {
+        setPushing(true);
+        try {
+            await push(authedRequest);
+            navigate('/');
+        } catch (e) {
+            console.error(e);
+            alert('Push failed. Please try again.');
+        } finally {
+            setPushing(false);
+        }
     }
 
     const tabs = ['profile', 'experiences', 'projects', 'skills', 'links'];
+    const expList = draft.entities.experiences;
+    const projList = draft.entities.projects;
+    const skillList = draft.entities.skills;
+    const linkList = draft.entities.links;
 
     return (
         <div className={styles.page}>
@@ -178,7 +211,7 @@ function Admin() {
                         <div className={styles.field}><label>Location</label><input value={profileForm.location} onChange={e => setProfileForm(f => ({ ...f, location: e.target.value }))} /></div>
                         <div className={styles.field}><label>Headline</label><input value={profileForm.headline} onChange={e => setProfileForm(f => ({ ...f, headline: e.target.value }))} /></div>
                         <div className={styles.field}><label>Summary</label><textarea value={profileForm.summary} onChange={e => setProfileForm(f => ({ ...f, summary: e.target.value }))} /></div>
-                        <div className={styles.formActions}><button type="submit" className={styles.btnPrimary}>Save profile</button></div>
+                        <div className={styles.formActions}><button type="submit" className={styles.btnPrimary}>Stage profile</button></div>
                     </form>
                 )}
 
@@ -233,11 +266,12 @@ function Admin() {
                         </form>
                         <h2 className={styles.sectionTitle}>All experiences</h2>
                         <div className={styles.list}>
-                            {experiences.length === 0 && <p className={styles.empty}>No experiences yet.</p>}
-                            {experiences.map(exp => (
+                            {expList === undefined && <p className={styles.empty}>Loading…</p>}
+                            {expList !== undefined && expList.length === 0 && <p className={styles.empty}>No experiences yet.</p>}
+                            {(expList || []).map(exp => (
                                 <div key={exp.id} className={styles.listItem}>
                                     <div className={styles.listItemInfo}>
-                                        <strong>{exp.title} @ {exp.company}</strong>
+                                        <strong>{exp.title} @ {exp.company}{exp._new ? ' ·  unsaved' : ''}</strong>
                                         <span>{exp.location} · {exp.start_date} – {exp.is_current ? 'Present' : exp.end_date}</span>
                                     </div>
                                     <div className={styles.listItemActions}>
@@ -274,11 +308,12 @@ function Admin() {
                         </form>
                         <h2 className={styles.sectionTitle}>All projects</h2>
                         <div className={styles.list}>
-                            {projects.length === 0 && <p className={styles.empty}>No projects yet.</p>}
-                            {projects.map(proj => (
+                            {projList === undefined && <p className={styles.empty}>Loading…</p>}
+                            {projList !== undefined && projList.length === 0 && <p className={styles.empty}>No projects yet.</p>}
+                            {(projList || []).map(proj => (
                                 <div key={proj.id} className={styles.listItem}>
                                     <div className={styles.listItemInfo}>
-                                        <strong>{proj.name}</strong>
+                                        <strong>{proj.name}{proj._new ? ' · unsaved' : ''}</strong>
                                         <span>{proj.description}</span>
                                     </div>
                                     <div className={styles.listItemActions}>
@@ -317,11 +352,12 @@ function Admin() {
                         </form>
                         <h2 className={styles.sectionTitle}>All skills</h2>
                         <div className={styles.list}>
-                            {skills.length === 0 && <p className={styles.empty}>No skills yet.</p>}
-                            {skills.map(skill => (
+                            {skillList === undefined && <p className={styles.empty}>Loading…</p>}
+                            {skillList !== undefined && skillList.length === 0 && <p className={styles.empty}>No skills yet.</p>}
+                            {(skillList || []).map(skill => (
                                 <div key={skill.id} className={styles.listItem}>
                                     <div className={styles.listItemInfo}>
-                                        <strong>{skill.name}</strong>
+                                        <strong>{skill.name}{skill._new ? ' · unsaved' : ''}</strong>
                                         <span>{skill.category}{skill.proficiency ? ` · ${skill.proficiency}` : ''}{skill.years_experience ? ` · ${skill.years_experience}y` : ''}</span>
                                     </div>
                                     <div className={styles.listItemActions}>
@@ -351,11 +387,12 @@ function Admin() {
                         </form>
                         <h2 className={styles.sectionTitle}>All links</h2>
                         <div className={styles.list}>
-                            {links.length === 0 && <p className={styles.empty}>No links yet.</p>}
-                            {links.map(link => (
+                            {linkList === undefined && <p className={styles.empty}>Loading…</p>}
+                            {linkList !== undefined && linkList.length === 0 && <p className={styles.empty}>No links yet.</p>}
+                            {(linkList || []).map(link => (
                                 <div key={link.id} className={styles.listItem}>
                                     <div className={styles.listItemInfo}>
-                                        <strong>{link.label || link.link_type}</strong>
+                                        <strong>{link.label || link.link_type}{link._new ? ' · unsaved' : ''}</strong>
                                         <span>{link.url}</span>
                                     </div>
                                     <div className={styles.listItemActions}>
@@ -370,7 +407,12 @@ function Admin() {
 
             <div className={styles.previewPill}>
                 <span className={styles.previewPillLabel}>Editing as admin</span>
-                <button className={styles.previewPillBtn} onClick={() => navigate('/')}>Preview</button>
+                {hasDraft && (
+                    <button className={styles.previewPillBtn} onClick={handlePush} disabled={pushing}>
+                        {pushing ? 'Pushing…' : 'Push Changes'}
+                    </button>
+                )}
+                <button className={styles.previewPillSecBtn} onClick={() => navigate('/')}>Preview</button>
             </div>
         </div>
     );
