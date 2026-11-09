@@ -41,7 +41,7 @@ function WorkSection() {
     if (!experiences.length) return null;
 
     return (
-        <section className={styles.section}>
+        <section id="work" className={styles.section}>
             <p className={styles.label}>Where I Have Grown</p>
             <div className={styles.list}>
                 {experiences.map((exp) => {
