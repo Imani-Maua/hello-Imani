@@ -85,8 +85,9 @@
 .availableCard {
     position: absolute;
     bottom: 5rem;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 2.5rem;
+    left: auto;
+    transform: none;
     background: rgba(212, 165, 165, 0.1);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
