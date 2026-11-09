@@ -135,6 +135,21 @@ function ExperienceLanding() {
                     <span className={styles.word}>{displayText}</span>
                     <span className={styles.cursor}>|</span>
                 </p>
+
+                <div className={styles.availableCard}>
+                    <div className={styles.availableHeader}>
+                        <span className={styles.dot} />
+                        <span className={styles.availableLabel}>Available to work</span>
+                    </div>
+                    <p className={styles.availableText}>
+                        I'm actively searching for new grad roles <strong>'27</strong>
+                    </p>
+                    <div className={styles.cardDivider} />
+                    <a href="mailto:elainemaua644@gmail.com" className={styles.hireButton}>
+                        <span className={styles.hireArrow}>→</span>
+                        <span>Hire Me!</span>
+                    </a>
+                </div>
             </div>
 
             <div className={styles.scrollHint}>scroll ↓</div>
