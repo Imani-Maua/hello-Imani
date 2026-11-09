@@ -16,8 +16,8 @@ function App() {
         <Navbar />
         <div style={{ flex: 1 }}>
           <Routes>
-            <Route path='/' element={<About />} />
-            <Route path='/experience' element={<Experience />} />
+            <Route path='/' element={<Experience />} />
+            <Route path='/experience' element={<About />} />
             <Route path='/extracurriculars' element={<Extracurriculars />} />
             <Route path='/projects' element={<Projects />} />
           </Routes>
