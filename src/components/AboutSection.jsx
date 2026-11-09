@@ -1,7 +1,23 @@
+import { useState, useEffect } from 'react';
 import profileImg from '../assets/profile4.jpg';
 import styles from './AboutSection.module.scss';
+import { publicGet } from '../services/api';
+
+const CANDIDATE_ID = 1;
+const EMAIL = 'mauaelaineimani@gmail.com';
 
 function AboutSection() {
+    const [links, setLinks] = useState([]);
+
+    useEffect(() => {
+        publicGet(`/candidates/${CANDIDATE_ID}/links`)
+            .then(setLinks)
+            .catch(() => {});
+    }, []);
+
+    const github = links.find(l => l.link_type === 'github');
+    const linkedin = links.find(l => l.link_type === 'linkedin');
+
     return (
         <section className={styles.section}>
             <div className={styles.card}>
@@ -22,6 +38,11 @@ function AboutSection() {
                     <p className={styles.aboutProse}>
                         Occasionally, I close my laptop and become a person. Occasionally.
                     </p>
+                    <div className={styles.links}>
+                        {linkedin && <a href={linkedin.url} target="_blank" rel="noopener noreferrer" className={styles.link}>LinkedIn</a>}
+                        {github && <a href={github.url} target="_blank" rel="noopener noreferrer" className={styles.link}>GitHub</a>}
+                        <a href={`mailto:${EMAIL}`} className={styles.link}>Email</a>
+                    </div>
                 </div>
             </div>
         </section>
