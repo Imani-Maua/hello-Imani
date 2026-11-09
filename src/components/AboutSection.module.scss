@@ -24,7 +24,7 @@
     min-height: 100vh;
     display: flex;
     align-items: flex-start;
-    padding: 3rem 6rem 6rem;
+    padding: calc(3rem + 4vh) 6rem 6rem;
     background: $bg-offwhite;
 
     @media (max-width: 768px) {
