@@ -84,6 +84,8 @@
 .lineLTR  { animation-name: slideLTR; }
 .lineRTL  { animation-name: slideRTL; }
 .lineDiag { animation-name: slideDiag; }
+.lineTTB  { animation-name: slideTTB; }
+.lineBTT  { animation-name: slideBTT; }
 
 @keyframes slideLTR {
     from { transform: translateX(-300px); }
@@ -98,6 +100,16 @@
 @keyframes slideDiag {
     from { transform: translate(-300px, 0px); }
     to   { transform: translate(calc(100vw + 300px), 45px); }
+}
+
+@keyframes slideTTB {
+    from { transform: translateY(-220px); }
+    to   { transform: translateY(calc(100vh + 220px)); }
+}
+
+@keyframes slideBTT {
+    from { transform: translateY(calc(100vh + 220px)); }
+    to   { transform: translateY(-220px); }
 }
 
 @keyframes float {
