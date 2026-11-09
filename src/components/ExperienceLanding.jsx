@@ -68,31 +68,21 @@ const motifs = [
 ];
 
 function ExperienceLanding() {
-    const [displayText, setDisplayText] = useState('');
     const [wordIndex, setWordIndex] = useState(0);
-    const [isDeleting, setIsDeleting] = useState(false);
+    const [visible, setVisible] = useState(true);
 
     useEffect(() => {
-        const currentWord = words[wordIndex];
-        let timeout;
+        const pause = setTimeout(() => {
+            setVisible(false);
+            const swap = setTimeout(() => {
+                setWordIndex((prev) => (prev + 1) % words.length);
+                setVisible(true);
+            }, 450);
+            return () => clearTimeout(swap);
+        }, 2800);
 
-        if (!isDeleting && displayText === currentWord) {
-            timeout = setTimeout(() => setIsDeleting(true), 1500);
-        } else if (isDeleting && displayText === '') {
-            setIsDeleting(false);
-            setWordIndex((prev) => (prev + 1) % words.length);
-        } else {
-            timeout = setTimeout(() => {
-                setDisplayText(
-                    isDeleting
-                        ? currentWord.slice(0, displayText.length - 1)
-                        : currentWord.slice(0, displayText.length + 1)
-                );
-            }, isDeleting ? 55 : 95);
-        }
-
-        return () => clearTimeout(timeout);
-    }, [displayText, isDeleting, wordIndex]);
+        return () => clearTimeout(pause);
+    }, [wordIndex]);
 
     return (
         <section className={styles.landing}>
@@ -128,12 +118,13 @@ function ExperienceLanding() {
             ))}
 
             <div className={styles.content}>
-                <p className={styles.headline}>
-                    Hi! I'm Elaine, I love
-                </p>
-                <p className={styles.typewriterLine}>
-                    <span className={styles.typewriter}>{displayText}</span>
-                    <span className={styles.cursor}>|</span>
+                <p className={styles.greeting}>Hello, My name is</p>
+                <h1 className={styles.name}>Maua Elaine Imani</h1>
+                <p className={styles.enjoy}>
+                    I enjoy{' '}
+                    <span className={`${styles.word} ${visible ? styles.wordVisible : styles.wordHidden}`}>
+                        {words[wordIndex]}
+                    </span>
                 </p>
             </div>
 
