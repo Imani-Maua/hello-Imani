@@ -46,17 +46,46 @@
 }
 
 .sidebar {
-    width: 280px;
+    width: 220px;
     flex-shrink: 0;
     background: $bg-card;
     border-right: 1px solid $border-gray;
-    padding: 2rem;
+    padding: 1.5rem 1rem;
 
     @media (max-width: 768px) {
         width: 100%;
         border-right: none;
         border-bottom: 1px solid $border-gray;
+        display: flex;
+        padding: 0.75rem 1rem;
     }
+}
+
+.navItem {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    text-align: left;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: $text-primary;
+    cursor: pointer;
+    font-family: $font-base;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+        background: rgba(143, 173, 136, 0.12);
+        color: $brand-pink;
+    }
+}
+
+.navItemActive {
+    background: rgba(143, 173, 136, 0.18);
+    color: $brand-pink;
+    font-weight: 600;
 }
 
 .mainContent {
@@ -288,6 +317,43 @@
     transition: all 0.2s;
 
     &:hover { border-color: #b94040; color: #b94040; }
+}
+
+.profileView {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.profileRow {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid $border-gray;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.profileLabel {
+    width: 130px;
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $text-primary;
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-top: 0.05rem;
+}
+
+.profileValue {
+    flex: 1;
+    font-size: 0.95rem;
+    color: $text-primary;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .hint {
