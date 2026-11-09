@@ -23,8 +23,8 @@
 .section {
     min-height: 100vh;
     display: flex;
-    align-items: center;
-    padding: 2rem 6rem 6rem;
+    align-items: flex-start;
+    padding: 3rem 6rem 6rem;
     background: $bg-offwhite;
 
     @media (max-width: 768px) {
