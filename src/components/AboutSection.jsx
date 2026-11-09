@@ -2,18 +2,26 @@ import { useState, useEffect } from 'react';
 import profileImg from '../assets/profile4.jpg';
 import styles from './AboutSection.module.scss';
 import { publicGet } from '../services/api';
+import { useAuth } from '../context/AuthContext';
+import { useDraft } from '../context/DraftContext';
 
 const CANDIDATE_ID = 1;
 const EMAIL = 'mauaelaineimani@gmail.com';
 
 function AboutSection() {
+    const { isAuthed } = useAuth();
+    const { state: draft } = useDraft();
     const [links, setLinks] = useState([]);
 
     useEffect(() => {
-        publicGet(`/candidates/${CANDIDATE_ID}/links`)
-            .then(setLinks)
-            .catch(() => {});
-    }, []);
+        if (isAuthed && draft.entities.links !== undefined) {
+            setLinks(draft.entities.links);
+        } else {
+            publicGet(`/candidates/${CANDIDATE_ID}/links`)
+                .then(setLinks)
+                .catch(() => {});
+        }
+    }, [isAuthed, draft.entities.links]);
 
     const github = links.find(l => l.link_type === 'github');
     const linkedin = links.find(l => l.link_type === 'linkedin');
