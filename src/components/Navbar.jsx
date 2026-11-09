@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 
 function Navbar() {
@@ -15,14 +15,10 @@ function Navbar() {
             </Link>
 
             <div className={styles.navigators}>
+                <a href="/#about" className={styles.navLink}>About Me</a>
                 <a href="/#work" className={styles.navLink}>Experience</a>
                 <a href="/#projects" className={styles.navLink}>Projects</a>
-            </div>
-
-            <div className={styles.contactCard}>
-                <a href="mailto:elainemaua644@gmail.com?subject=We are looking for a software engineer&body=Hello Maua, ">
-                    <button>Contact Me</button>
-                </a>
+                <a href="mailto:mauaelaineimani@gmail.com" className={styles.navLink}>Contact Me</a>
             </div>
 
             <div className={styles.mobileMenuIcon} onClick={toggleMenu}>
@@ -34,11 +30,10 @@ function Navbar() {
                     <div className={styles.overlayContent}>
                         <div className={styles.closeIcon} onClick={toggleMenu}>✕</div>
                         <div className={styles.mobileLinks}>
+                            <a href="/#about" className={styles.navLink} onClick={closeMenu}>About Me</a>
                             <a href="/#work" className={styles.navLink} onClick={closeMenu}>Experience</a>
                             <a href="/#projects" className={styles.navLink} onClick={closeMenu}>Projects</a>
-                            <a href="mailto:mauaelaineimani@gmail.com" className={styles.mobileContactLink} onClick={closeMenu}>
-                                Contact Me
-                            </a>
+                            <a href="mailto:mauaelaineimani@gmail.com" className={styles.navLink} onClick={closeMenu}>Contact Me</a>
                         </div>
                     </div>
                 </div>
