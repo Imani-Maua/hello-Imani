@@ -8,7 +8,7 @@ const toArr = str => str.split(',').map(s => s.trim()).filter(Boolean);
 const fromArr = arr => (arr || []).join(', ');
 const n = val => (val === '' || val === undefined) ? null : val;
 
-const BLANK_EXP = { company: '', title: '', location: '', start_date: '', end_date: '', is_current: false, description: '', achievements: '', technologies: '' };
+const BLANK_EXP = { company: '', title: '', location: '', work_type: '', employment_type: '', start_date: '', end_date: '', is_current: false, description: '', achievements: '', technologies: '' };
 const BLANK_PROJ = { name: '', description: '', url: '', repo_url: '', start_date: '', end_date: '', technologies: '', highlights: '' };
 const BLANK_SKILL = { name: '', category: 'other', proficiency: '', years_experience: '' };
 const BLANK_LINK = { link_type: 'github', label: '', url: '' };
@@ -70,7 +70,7 @@ function Admin() {
     }
     async function saveExperience(e) {
         e.preventDefault();
-        const body = { company: expForm.company, title: expForm.title, location: n(expForm.location), start_date: n(expForm.start_date), end_date: expForm.is_current ? null : n(expForm.end_date), is_current: expForm.is_current, description: n(expForm.description), achievements: toArr(expForm.achievements), technologies: toArr(expForm.technologies) };
+        const body = { company: expForm.company, title: expForm.title, location: n(expForm.location), work_type: n(expForm.work_type), employment_type: n(expForm.employment_type), start_date: n(expForm.start_date), end_date: expForm.is_current ? null : n(expForm.end_date), is_current: expForm.is_current, description: n(expForm.description), achievements: toArr(expForm.achievements), technologies: toArr(expForm.technologies) };
         try {
             if (editingExp) await authedRequest('PATCH', `/candidates/${candidateId}/work-experiences/${editingExp}`, body);
             else await authedRequest('POST', `/candidates/${candidateId}/work-experiences`, body);
@@ -79,7 +79,7 @@ function Admin() {
     }
     function startEditExp(exp) {
         setEditingExp(exp.id);
-        setExpForm({ company: exp.company || '', title: exp.title || '', location: exp.location || '', start_date: exp.start_date || '', end_date: exp.end_date || '', is_current: exp.is_current || false, description: exp.description || '', achievements: fromArr(exp.achievements), technologies: fromArr(exp.technologies) });
+        setExpForm({ company: exp.company || '', title: exp.title || '', location: exp.location || '', work_type: exp.work_type || '', employment_type: exp.employment_type || '', start_date: exp.start_date || '', end_date: exp.end_date || '', is_current: exp.is_current || false, description: exp.description || '', achievements: fromArr(exp.achievements), technologies: fromArr(exp.technologies) });
     }
     async function deleteExperience(id) {
         if (!confirm('Delete this experience?')) return;
@@ -190,6 +190,26 @@ function Admin() {
                             <div className={styles.row}>
                                 <div className={styles.field}><label>Company *</label><input required value={expForm.company} onChange={e => setExpForm(f => ({ ...f, company: e.target.value }))} /></div>
                                 <div className={styles.field}><label>Title *</label><input required value={expForm.title} onChange={e => setExpForm(f => ({ ...f, title: e.target.value }))} /></div>
+                            </div>
+                            <div className={styles.row}>
+                                <div className={styles.field}>
+                                    <label>Work arrangement</label>
+                                    <select value={expForm.work_type} onChange={e => setExpForm(f => ({ ...f, work_type: e.target.value }))}>
+                                        <option value=''>— select —</option>
+                                        <option value='Hybrid'>Hybrid</option>
+                                        <option value='InPerson'>In Person</option>
+                                        <option value='Remote'>Remote</option>
+                                    </select>
+                                </div>
+                                <div className={styles.field}>
+                                    <label>Employment type</label>
+                                    <select value={expForm.employment_type} onChange={e => setExpForm(f => ({ ...f, employment_type: e.target.value }))}>
+                                        <option value=''>— select —</option>
+                                        <option value='FullTime'>Full Time</option>
+                                        <option value='PartTime'>Part Time</option>
+                                        <option value='Internship'>Internship</option>
+                                    </select>
+                                </div>
                             </div>
                             <div className={styles.row}>
                                 <div className={styles.field}><label>Location</label><input value={expForm.location} onChange={e => setExpForm(f => ({ ...f, location: e.target.value }))} /></div>
