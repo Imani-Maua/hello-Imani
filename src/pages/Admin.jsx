@@ -150,10 +150,7 @@ function Admin() {
         <div className={styles.page}>
             <header className={styles.header}>
                 <h1 className={styles.heading}>Dashboard</h1>
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <button className={styles.logout} onClick={() => navigate('/')}>Preview</button>
-                    <button className={styles.logout} onClick={() => { logout(); navigate('/'); }}>Log out</button>
-                </div>
+                <button className={styles.logout} onClick={() => { logout(); navigate('/'); }}>Log out</button>
             </header>
 
             <nav className={styles.tabs}>
@@ -347,6 +344,11 @@ function Admin() {
                         </div>
                     </>
                 )}
+            </div>
+
+            <div className={styles.previewPill}>
+                <span className={styles.previewPillLabel}>Editing as admin</span>
+                <button className={styles.previewPillBtn} onClick={() => navigate('/')}>Preview</button>
             </div>
         </div>
     );
