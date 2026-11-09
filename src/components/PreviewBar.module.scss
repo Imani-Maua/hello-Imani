@@ -24,6 +24,22 @@
     font-weight: 400;
 }
 
+.pushBtn {
+    padding: 0.35rem 1rem;
+    background: $text-primary;
+    color: white;
+    border: none;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: $font-base;
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 0.8; }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
 .btn {
     padding: 0.35rem 1rem;
     background: $brand-pink;
