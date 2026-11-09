@@ -1,0 +1,33 @@
+@use '../styles/variables.scss' as *;
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 4rem 6rem;
+    background: $bg-offwhite;
+
+    @media (max-width: 768px) {
+        padding: 3rem 2rem;
+        justify-content: center;
+    }
+}
+
+.imageWrapper {
+    flex-shrink: 0;
+    border: 7px solid $brand-pink;
+    border-radius: 28px;
+    overflow: hidden;
+    max-width: 420px;
+    width: 100%;
+
+    @media (max-width: 768px) {
+        max-width: 320px;
+    }
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
