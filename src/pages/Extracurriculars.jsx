@@ -1,5 +1,4 @@
 import ExperienceSection from '../components/ExperienceSection';
-import { extracurriculars } from '../data/experiences';
 import styles from './Page.module.scss';
 
 function Extracurriculars() {
@@ -9,10 +8,7 @@ function Extracurriculars() {
         <h1>Community & Impact</h1>
       </header>
 
-      <ExperienceSection
-        experiences={extracurriculars}
-        hideTitle={true}
-      />
+      <ExperienceSection hideTitle={true} />
     </div>
   );
 }
