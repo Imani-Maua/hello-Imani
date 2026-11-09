@@ -63,12 +63,16 @@
 .word {
     color: $brand-pink;
     font-weight: 600;
-    transition: opacity 0.4s ease;
     display: inline-block;
 }
 
-.wordVisible { opacity: 1; }
-.wordHidden  { opacity: 0; }
+.cursor {
+    display: inline-block;
+    color: $brand-pink;
+    font-weight: 300;
+    animation: blink 0.75s step-end infinite;
+    margin-left: 2px;
+}
 
 .scrollHint {
     position: absolute;
