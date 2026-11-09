@@ -196,18 +196,20 @@ function Admin() {
                                     <label>Work arrangement</label>
                                     <select value={expForm.work_type} onChange={e => setExpForm(f => ({ ...f, work_type: e.target.value }))}>
                                         <option value=''>— select —</option>
-                                        <option value='Hybrid'>Hybrid</option>
-                                        <option value='InPerson'>In Person</option>
-                                        <option value='Remote'>Remote</option>
+                                        <option value='hybrid'>Hybrid</option>
+                                        <option value='in_person'>In Person</option>
+                                        <option value='remote'>Remote</option>
                                     </select>
                                 </div>
                                 <div className={styles.field}>
                                     <label>Employment type</label>
                                     <select value={expForm.employment_type} onChange={e => setExpForm(f => ({ ...f, employment_type: e.target.value }))}>
                                         <option value=''>— select —</option>
-                                        <option value='FullTime'>Full Time</option>
-                                        <option value='PartTime'>Part Time</option>
-                                        <option value='Internship'>Internship</option>
+                                        <option value='full_time'>Full Time</option>
+                                        <option value='part_time'>Part Time</option>
+                                        <option value='internship'>Internship</option>
+                                        <option value='fellowship'>Fellowship</option>
+                                        <option value='research'>Research</option>
                                     </select>
                                 </div>
                             </div>
