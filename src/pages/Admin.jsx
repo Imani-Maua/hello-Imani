@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useDraft } from '../context/DraftContext';
@@ -20,9 +20,9 @@ function Admin() {
     const { state: draft, seed, add, updateItem, removeItem, stageObj, push, hasDraft } = useDraft();
     const [pushing, setPushing] = useState(false);
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-    const [activePage, setActivePage] = useState('dashboard');
     const [editingProfile, setEditingProfile] = useState(false);
     const [activeForm, setActiveForm] = useState(null);
+    const profileRef = useRef(null);
 
     const [profileForm, setProfileForm] = useState({ firstname: '', lastname: '', email: '', phone: '', location: '', headline: '', summary: '' });
 
@@ -204,8 +204,8 @@ function Admin() {
                         {sidebarCollapsed ? '→' : '←'}
                     </button>
                     <button
-                        className={`${styles.navItem} ${activePage === 'profile' ? styles.navItemActive : ''}`}
-                        onClick={() => setActivePage('profile')}
+                        className={styles.navItem}
+                        onClick={() => profileRef.current?.scrollIntoView({ behavior: 'smooth' })}
                     >
                         Profile
                     </button>
@@ -214,58 +214,55 @@ function Admin() {
                 {/* MAIN CONTENT */}
                 <div className={styles.mainContent}>
 
-                    {/* PROFILE PAGE */}
-                    {activePage === 'profile' && (
-                        <div className={styles.adminSection}>
-                            <div className={styles.sectionHeader}>
-                                <h2 className={styles.sectionTitle}>Profile</h2>
-                                {!editingProfile && (
-                                    <button className={styles.btnAdd} onClick={() => setEditingProfile(true)}>Edit Profile</button>
-                                )}
-                            </div>
-
-                            {editingProfile ? (
-                                <form className={styles.form} onSubmit={saveProfile}>
-                                    <div className={styles.row}>
-                                        <div className={styles.field}><label>First name</label><input value={p.firstname} onChange={e => setProfileForm(f => ({ ...f, firstname: e.target.value }))} /></div>
-                                        <div className={styles.field}><label>Last name</label><input value={p.lastname} onChange={e => setProfileForm(f => ({ ...f, lastname: e.target.value }))} /></div>
-                                    </div>
-                                    <div className={styles.row}>
-                                        <div className={styles.field}><label>Email</label><input type="email" value={p.email} onChange={e => setProfileForm(f => ({ ...f, email: e.target.value }))} /></div>
-                                        <div className={styles.field}><label>Phone</label><input value={p.phone} onChange={e => setProfileForm(f => ({ ...f, phone: e.target.value }))} /></div>
-                                    </div>
-                                    <div className={styles.field}><label>Location</label><input value={p.location} onChange={e => setProfileForm(f => ({ ...f, location: e.target.value }))} /></div>
-                                    <div className={styles.field}><label>Headline</label><input value={p.headline} onChange={e => setProfileForm(f => ({ ...f, headline: e.target.value }))} /></div>
-                                    <div className={styles.field}><label>Summary</label><textarea value={p.summary} onChange={e => setProfileForm(f => ({ ...f, summary: e.target.value }))} /></div>
-                                    <div className={styles.formActions}>
-                                        <button type="submit" className={styles.btnPrimary}>Stage profile</button>
-                                        <button type="button" className={styles.btnSecondary} onClick={() => setEditingProfile(false)}>Cancel</button>
-                                    </div>
-                                </form>
-                            ) : (
-                                <div className={styles.profileView}>
-                                    {[
-                                        ['First name', p.firstname],
-                                        ['Last name', p.lastname],
-                                        ['Email', p.email],
-                                        ['Phone', p.phone],
-                                        ['Location', p.location],
-                                        ['Headline', p.headline],
-                                        ['Summary', p.summary],
-                                    ].map(([label, val]) => (
-                                        <div key={label} className={styles.profileRow}>
-                                            <span className={styles.profileLabel}>{label}</span>
-                                            <span className={styles.profileValue}>{val || '—'}</span>
-                                        </div>
-                                    ))}
-                                </div>
+                    {/* PROFILE */}
+                    <div className={styles.adminSection} ref={profileRef}>
+                        <div className={styles.sectionHeader}>
+                            <h2 className={styles.sectionTitle}>Profile</h2>
+                            {!editingProfile && (
+                                <button className={styles.btnAdd} onClick={() => setEditingProfile(true)}>Edit Profile</button>
                             )}
                         </div>
-                    )}
 
-                    {/* DASHBOARD — experiences, projects, skills, links */}
-                    {activePage === 'dashboard' && (
-                        <>
+                        {editingProfile ? (
+                            <form className={styles.form} onSubmit={saveProfile}>
+                                <div className={styles.row}>
+                                    <div className={styles.field}><label>First name</label><input value={p.firstname} onChange={e => setProfileForm(f => ({ ...f, firstname: e.target.value }))} /></div>
+                                    <div className={styles.field}><label>Last name</label><input value={p.lastname} onChange={e => setProfileForm(f => ({ ...f, lastname: e.target.value }))} /></div>
+                                </div>
+                                <div className={styles.row}>
+                                    <div className={styles.field}><label>Email</label><input type="email" value={p.email} onChange={e => setProfileForm(f => ({ ...f, email: e.target.value }))} /></div>
+                                    <div className={styles.field}><label>Phone</label><input value={p.phone} onChange={e => setProfileForm(f => ({ ...f, phone: e.target.value }))} /></div>
+                                </div>
+                                <div className={styles.field}><label>Location</label><input value={p.location} onChange={e => setProfileForm(f => ({ ...f, location: e.target.value }))} /></div>
+                                <div className={styles.field}><label>Headline</label><input value={p.headline} onChange={e => setProfileForm(f => ({ ...f, headline: e.target.value }))} /></div>
+                                <div className={styles.field}><label>Summary</label><textarea value={p.summary} onChange={e => setProfileForm(f => ({ ...f, summary: e.target.value }))} /></div>
+                                <div className={styles.formActions}>
+                                    <button type="submit" className={styles.btnPrimary}>Stage profile</button>
+                                    <button type="button" className={styles.btnSecondary} onClick={() => setEditingProfile(false)}>Cancel</button>
+                                </div>
+                            </form>
+                        ) : (
+                            <div className={styles.profileView}>
+                                {[
+                                    ['First name', p.firstname],
+                                    ['Last name', p.lastname],
+                                    ['Email', p.email],
+                                    ['Phone', p.phone],
+                                    ['Location', p.location],
+                                    ['Headline', p.headline],
+                                    ['Summary', p.summary],
+                                ].map(([label, val]) => (
+                                    <div key={label} className={styles.profileRow}>
+                                        <span className={styles.profileLabel}>{label}</span>
+                                        <span className={styles.profileValue}>{val || '—'}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* EXPERIENCES, PROJECTS, SKILLS, LINKS */}
+                    <>
                         {/* EXPERIENCES */}
                         <div className={styles.adminSection}>
                             <div className={styles.sectionHeader}>
@@ -481,7 +478,6 @@ function Admin() {
                             </div>
                         </div>
                         </>
-                    )}
 
                 </div>{/* end mainContent */}
             </div>{/* end layout */}
