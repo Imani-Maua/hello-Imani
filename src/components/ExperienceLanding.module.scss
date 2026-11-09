@@ -169,17 +169,6 @@
     }
 }
 
-.scrollHint {
-    position: absolute;
-    bottom: 2rem;
-    font-size: 0.8rem;
-    color: $text-primary;
-    opacity: 0.35;
-    letter-spacing: 0.1em;
-    animation: fadeUpDown 2s ease-in-out infinite;
-    user-select: none;
-}
-
 .line {
     position: absolute;
     left: 0;
