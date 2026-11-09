@@ -8,6 +8,7 @@ import Projects from './pages/Projects';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
 import { AuthProvider } from './context/AuthContext';
+import PreviewBar from './components/PreviewBar';
 
 function MainLayout() {
   return (
@@ -15,6 +16,7 @@ function MainLayout() {
       <Navbar />
       <div style={{ flex: 1 }}><Outlet /></div>
       <Footer />
+      <PreviewBar />
     </div>
   );
 }
