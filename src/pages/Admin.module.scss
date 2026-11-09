@@ -39,10 +39,30 @@
 }
 
 
-.content {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem 2rem;
+.layout {
+    display: flex;
+    align-items: stretch;
+    min-height: calc(100vh - 73px);
+}
+
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    background: $bg-card;
+    border-right: 1px solid $border-gray;
+    padding: 2rem;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid $border-gray;
+    }
+}
+
+.mainContent {
+    flex: 1;
+    padding: 2rem;
+    min-width: 0;
 }
 
 .adminSection {
