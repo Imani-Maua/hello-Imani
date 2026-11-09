@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import styles from './WorkSection.module.scss';
 import { publicGet } from '../services/api';
+import { useAuth } from '../context/AuthContext';
+import { useDraft } from '../context/DraftContext';
 
 const CANDIDATE_ID = 1;
 
@@ -13,21 +15,28 @@ function formatDate(iso) {
     return d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
 }
 
+function sortByDate(data) {
+    return [...data].sort((a, b) => {
+        const aDate = a.start_date ? new Date(a.start_date) : new Date(0);
+        const bDate = b.start_date ? new Date(b.start_date) : new Date(0);
+        return bDate - aDate;
+    });
+}
+
 function WorkSection() {
+    const { isAuthed } = useAuth();
+    const { state: draft } = useDraft();
     const [experiences, setExperiences] = useState([]);
 
     useEffect(() => {
-        publicGet(`/candidates/${CANDIDATE_ID}/work-experiences`)
-            .then(data => {
-                const sorted = [...data].sort((a, b) => {
-                    const aDate = a.start_date ? new Date(a.start_date) : new Date(0);
-                    const bDate = b.start_date ? new Date(b.start_date) : new Date(0);
-                    return bDate - aDate;
-                });
-                setExperiences(sorted);
-            })
-            .catch(() => {});
-    }, []);
+        if (isAuthed && draft.entities.experiences !== undefined) {
+            setExperiences(sortByDate(draft.entities.experiences));
+        } else {
+            publicGet(`/candidates/${CANDIDATE_ID}/work-experiences`)
+                .then(data => setExperiences(sortByDate(data)))
+                .catch(() => {});
+        }
+    }, [isAuthed, draft.entities.experiences]);
 
     if (!experiences.length) return null;
 
