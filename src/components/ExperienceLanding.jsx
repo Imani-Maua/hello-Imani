@@ -153,7 +153,7 @@ function ExperienceLanding() {
                 </a>
             </div>
 
-            <div className={styles.scrollHint}>scroll ↓</div>
+
         </section>
     );
 }
