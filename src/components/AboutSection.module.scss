@@ -1,48 +1,53 @@
 @use '../styles/variables.scss' as *;
 
-.divider {
-    padding: 2.5rem 0;
-}
-
-.dividerLineLeft {
-    width: 44%;
-    height: 3px;
-    background: $text-primary;
-    border-radius: 1px;
-}
-
-.dividerLineRight {
-    width: 44%;
-    height: 3px;
-    background: $text-primary;
-    border-radius: 1px;
-    margin-left: auto;
-    margin-top: 3em;
-}
-
 .section {
     min-height: 100vh;
     display: flex;
     align-items: flex-start;
-    padding: calc(3rem + 4vh) 6rem 6rem;
+    padding: calc(3rem + 4vh) 2em 6rem;
     background: $bg-offwhite;
 
     @media (max-width: 768px) {
-        padding: 3rem 2rem;
-        justify-content: center;
+        padding: 3rem 1.5rem 4rem;
     }
 }
 
-.imageWrapper {
+.card {
+    width: 100%;
+    background: $bg-card;
+    border-radius: 20px;
+    box-shadow: 0 4px 32px rgba(58, 47, 53, 0.08), 0 1px 6px rgba(58, 47, 53, 0.04);
+    padding: 2.5rem;
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.textSide {
+    flex: 1;
+    color: $text-primary;
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.imageSide {
     flex-shrink: 0;
-    border: 7px solid $brand-pink;
-    border-radius: 28px;
+}
+
+.imageWrapper {
+    border: 4px solid $brand-pink;
+    border-radius: 20px;
     overflow: hidden;
-    max-width: 420px;
+    max-width: 300px;
     width: 100%;
 
     @media (max-width: 768px) {
-        max-width: 320px;
+        max-width: 260px;
     }
 }
 
