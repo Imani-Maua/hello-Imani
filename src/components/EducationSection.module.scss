@@ -5,6 +5,46 @@
     background: $bg-offwhite;
 }
 
+.wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+
+.eduInfo {
+    flex-shrink: 0;
+}
+
+.divider {
+    width: 1px;
+    align-self: stretch;
+    background: $text-primary;
+    opacity: 0.15;
+    margin: 0 2em;
+    flex-shrink: 0;
+}
+
+.coursework {
+    flex: 1;
+}
+
+.courseworkLabel {
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    font-weight: 400;
+    color: $text-primary;
+    opacity: 0.6;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 0.75rem 0;
+}
+
+.courseworkProse {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: $text-primary;
+    opacity: 0.8;
+    margin: 0;
+}
+
 .label {
     font-size: clamp(0.8rem, 1.5vw, 1rem);
     font-weight: 400;
