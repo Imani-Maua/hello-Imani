@@ -51,6 +51,8 @@
     background: $bg-card;
     border-right: 1px solid $border-gray;
     padding: 1.5rem 1rem;
+    transition: width 0.25s ease;
+    overflow: hidden;
 
     @media (max-width: 768px) {
         width: 100%;
@@ -58,6 +60,38 @@
         border-bottom: 1px solid $border-gray;
         display: flex;
         padding: 0.75rem 1rem;
+    }
+}
+
+.sidebarCollapsed {
+    width: 52px;
+    padding: 1.5rem 0.5rem;
+
+    .navItem {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.sidebarToggle {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: $text-primary;
+    cursor: pointer;
+    font-family: $font-base;
+    text-align: right;
+    margin-bottom: 0.5rem;
+    transition: background 0.2s, color 0.2s;
+    opacity: 0.5;
+
+    &:hover {
+        background: rgba(143, 173, 136, 0.12);
+        opacity: 1;
     }
 }
 
@@ -74,7 +108,8 @@
     color: $text-primary;
     cursor: pointer;
     font-family: $font-base;
-    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+    transition: background 0.2s, color 0.2s, opacity 0.2s;
 
     &:hover {
         background: rgba(143, 173, 136, 0.12);
