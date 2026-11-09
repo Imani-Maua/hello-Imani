@@ -98,7 +98,7 @@
     text-align: left;
     z-index: 1;
 
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
         left: auto;
         right: 1.25rem;
         bottom: 1.5rem;
@@ -139,7 +139,7 @@
     line-height: 1.6;
     margin: 0 0 1rem 0;
 
-    @media (max-width: 600px) { display: none; }
+    @media (max-width: 800px) { display: none; }
 }
 
 .cardDivider {
@@ -147,7 +147,7 @@
     background: rgba(212, 165, 165, 0.25);
     margin-bottom: 1rem;
 
-    @media (max-width: 600px) { display: none; }
+    @media (max-width: 800px) { display: none; }
 }
 
 .hireButton {
@@ -162,7 +162,7 @@
 
     &:hover { opacity: 0.75; }
 
-    @media (max-width: 600px) { display: none; }
+    @media (max-width: 800px) { display: none; }
 }
 
 .hireArrow {
