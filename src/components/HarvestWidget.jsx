@@ -33,7 +33,7 @@ function HarvestWidget() {
                             <p>Well, hello there, I am Harvest! 👋</p>
                             <p>I'm Elaine's networking assistant! I know quite a lot about the mind behind this portfolio, and I'm here to help you explore her work, ideas, and the thinking behind them.</p>
                             <p>I'm still putting a few finishing touches but I'll be ready to chat soon.</p>
-                            <p>In the mean time, have a look around, there's plenty to discover!</p>
+                            <p>In the mean time, have a look around, there's plenty to discover! 🌱</p>
                         </div>
                     </div>
                 </div>
