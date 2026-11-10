@@ -147,7 +147,12 @@ function ExperienceLanding() {
                     I'm actively searching for new grad roles <strong>'27</strong>
                 </p>
                 <div className={styles.cardDivider} />
-                <a href="mailto:mauaelaineimani@gmail.com" className={styles.hireButton}>
+                <a
+                    href="https://docs.google.com/document/d/1L64Avr4_JXRvWG8bMgjid4cKJeq2nVTdTCJkNvOzwUU/edit?tab=t.0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.hireButton}
+                >
                     <span className={styles.hireArrow}>→</span>
                     <span>Hire Me!</span>
                 </a>
