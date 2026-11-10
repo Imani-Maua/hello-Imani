@@ -10,6 +10,7 @@ import Admin from './pages/Admin';
 import { AuthProvider } from './context/AuthContext';
 import { DraftProvider } from './context/DraftContext';
 import PreviewBar from './components/PreviewBar';
+import HarvestWidget from './components/HarvestWidget';
 
 function MainLayout() {
   return (
@@ -18,6 +19,7 @@ function MainLayout() {
       <div style={{ flex: 1 }}><Outlet /></div>
       <Footer />
       <PreviewBar />
+      <HarvestWidget />
     </div>
   );
 }
