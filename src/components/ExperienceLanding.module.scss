@@ -92,10 +92,11 @@
     right: 2.5rem;
     left: auto;
     transform: none;
-    background: rgba(212, 165, 165, 0.1);
+    background: rgba(216, 57, 149, 0.22);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(212, 165, 165, 0.22);
+    border: 1px solid rgba(216, 57, 149, 0.45);
+    box-shadow: 0 0 24px rgba(216, 57, 149, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.12);
     border-radius: 20px;
     padding: 1.25rem 1.5rem;
     max-width: 300px;
@@ -154,7 +155,7 @@
 
 .cardDivider {
     height: 1px;
-    background: rgba(212, 165, 165, 0.25);
+    background: rgba(216, 57, 149, 0.35);
     margin-bottom: 1rem;
 
     @media (max-width: 1024px) { display: none; }
@@ -179,7 +180,7 @@
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    border: 1.5px solid rgba(212, 165, 165, 0.45);
+    border: 1.5px solid rgba(216, 57, 149, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
