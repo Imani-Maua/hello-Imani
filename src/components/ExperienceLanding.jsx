@@ -148,7 +148,7 @@ function ExperienceLanding() {
                 </p>
                 <div className={styles.cardDivider} />
                 <a
-                    href="https://docs.google.com/document/d/1L64Avr4_JXRvWG8bMgjid4cKJeq2nVTdTCJkNvOzwUU/edit?tab=t.0"
+                    href="https://docs.google.com/document/d/1ELtyyKwLvf-4tbBKxQ3IsCSNz44sl8ApSt3KNTGqI2c/edit?tab=t.0"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.hireButton}
